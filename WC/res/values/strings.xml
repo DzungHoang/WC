@@ -7,4 +7,13 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
 
+    <!-- Title actionbar -->
+    <string name="title_team_selection">Select favorite team</string>
+    
+    <!-- BUTTOM TITLE -->
+    <string name="btn_select_team_favorite">Select your team</string>
+    <string name="btn_group">Group</string>
+    <string name="btn_schedule">Schedule</string>
+    <string name="btn_done">Done</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>

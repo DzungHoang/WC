@@ -69,10 +69,70 @@ public class TeamInfo {
 	 * Based on team code, initialize nation flag resource ID
 	 * */
 	private void initFlagResource(String code){
-		if(code.equals(CODE_GRE)){
-			flag_resource = R.drawable.greece;
-		}else if(code.equals(CODE_RUS)){
-			flag_resource = R.drawable.russia;
+		if (code.equals(CODE_ALG)) {
+			flag_resource = R.drawable.flag_algeria;
+		} else if (code.equals(CODE_ARG)) {
+			flag_resource = R.drawable.flag_argentina;
+		} else if (code.equals(CODE_AUS)) {
+			flag_resource = R.drawable.flag_australia;
+		} else if (code.equals(CODE_BEL)) {
+			flag_resource = R.drawable.flag_belgium;
+		} else if (code.equals(CODE_BIH)) {
+			flag_resource = R.drawable.flag_bosnia;
+		} else if (code.equals(CODE_BRA)) {
+			flag_resource = R.drawable.flag_brazil;
+		} else if (code.equals(CODE_CHI)) {
+			flag_resource = R.drawable.flag_chile;
+		} else if (code.equals(CODE_CIV)) {
+			flag_resource = R.drawable.flag_cote_d_ivoire;
+		} else if (code.equals(CODE_CMR)) {
+			flag_resource = R.drawable.flag_cameroon;
+		} else if (code.equals(CODE_COL)) {
+			flag_resource = R.drawable.flag_colombia;
+		} else if (code.equals(CODE_CRC)) {
+			flag_resource = R.drawable.flag_costa;
+		} else if (code.equals(CODE_CRO)) {
+			flag_resource = R.drawable.flag_croatia;
+		} else if (code.equals(CODE_ECU)) {
+			flag_resource = R.drawable.flag_ecuador;
+		} else if (code.equals(CODE_ENG)) {
+			flag_resource = R.drawable.flag_england;
+		} else if (code.equals(CODE_ESP)) {
+			flag_resource = R.drawable.flag_spain;
+		} else if (code.equals(CODE_FRA)) {
+			flag_resource = R.drawable.flag_france;
+		} else if (code.equals(CODE_GER)) {
+			flag_resource = R.drawable.flag_germany;
+		} else if (code.equals(CODE_GHA)) {
+			flag_resource = R.drawable.flag_ghana;
+		} else if (code.equals(CODE_GRE)) {
+			flag_resource = R.drawable.flag_greece;
+		} else if (code.equals(CODE_HON)) {
+			flag_resource = R.drawable.flag_honduras;
+		} else if (code.equals(CODE_IRN)) {
+			flag_resource = R.drawable.flag_iran;
+		} else if (code.equals(CODE_ITA)) {
+			flag_resource = R.drawable.flag_italy;
+		} else if (code.equals(CODE_JPN)) {
+			flag_resource = R.drawable.flag_japan;
+		} else if (code.equals(CODE_KOR)) {
+			flag_resource = R.drawable.flag_korea_south;
+		} else if (code.equals(CODE_MEX)) {
+			flag_resource = R.drawable.flag_mexico;
+		} else if (code.equals(CODE_NED)) {
+			flag_resource = R.drawable.flag_netherlands;
+		} else if (code.equals(CODE_NGA)) {
+			flag_resource = R.drawable.flag_nigeria;
+		} else if (code.equals(CODE_POR)) {
+			flag_resource = R.drawable.flag_portugal;
+		} else if (code.equals(CODE_RUS)) {
+			flag_resource = R.drawable.flag_russia;
+		} else if (code.equals(CODE_SUI)) {
+			flag_resource = R.drawable.flag_switzerland;
+		} else if (code.equals(CODE_URU)) {
+			flag_resource = R.drawable.flag_uruguay;
+		} else if (code.equals(CODE_USA)) {
+			flag_resource = R.drawable.flag_united_states_of_america;
 		}
 	}
 	/**
@@ -92,5 +152,19 @@ public class TeamInfo {
 	 * */
 	public int getFlag(){
 		return flag_resource;
+	}
+	
+	/**
+	 * @return Team's key
+	 */
+	public String getKey() {
+		return key;
+	}
+	
+	/**
+	 * @return 
+	 */
+	public String getCode() {
+		return code;
 	}
 }
