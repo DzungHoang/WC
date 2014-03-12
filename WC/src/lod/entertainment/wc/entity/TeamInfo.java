@@ -65,6 +65,81 @@ public class TeamInfo {
 		this.group = group;
 		this.flag_resource = getFlagResource(code);
 	}
+	public TeamInfo(String key, String name, String code){
+		this.key = key;
+		this.name = name;
+		this.code = code;
+		autoArrangeGroup(code);
+		this.flag_resource = getFlagResource(code);
+	}
+	private void autoArrangeGroup(String code){
+		if (code.equals(CODE_ALG)) {
+			this.group = GROUP_H;
+		} else if (code.equals(CODE_ARG)) {
+			this.group = GROUP_F;
+		} else if (code.equals(CODE_AUS)) {
+			this.group = GROUP_B;
+		} else if (code.equals(CODE_BEL)) {
+			this.group = GROUP_H;
+		} else if (code.equals(CODE_BIH)) {
+			this.group = GROUP_F;
+		} else if (code.equals(CODE_BRA)) {
+			this.group = GROUP_A;
+		} else if (code.equals(CODE_CHI)) {
+			this.group = GROUP_B;
+		} else if (code.equals(CODE_CIV)) {
+			this.group = GROUP_C;
+		} else if (code.equals(CODE_CMR)) {
+			this.group = GROUP_A;
+		} else if (code.equals(CODE_COL)) {
+			this.group = GROUP_C;
+		} else if (code.equals(CODE_CRC)) {
+			this.group = GROUP_D;
+		} else if (code.equals(CODE_CRO)) {
+			this.group = GROUP_A;
+		} else if (code.equals(CODE_ECU)) {
+			this.group = GROUP_E;
+		} else if (code.equals(CODE_ENG)) {
+			this.group = GROUP_D;
+		} else if (code.equals(CODE_ESP)) {
+			this.group = GROUP_B;
+		} else if (code.equals(CODE_FRA)) {
+			this.group = GROUP_E;
+		} else if (code.equals(CODE_GER)) {
+			this.group = GROUP_G;
+		} else if (code.equals(CODE_GHA)) {
+			this.group = GROUP_G;
+		} else if (code.equals(CODE_GRE)) {
+			this.group = GROUP_C;
+		} else if (code.equals(CODE_HON)) {
+			this.group = GROUP_E;
+		} else if (code.equals(CODE_IRN)) {
+			this.group = GROUP_F;
+		} else if (code.equals(CODE_ITA)) {
+			this.group = GROUP_D;
+		} else if (code.equals(CODE_JPN)) {
+			this.group = GROUP_C;
+		} else if (code.equals(CODE_KOR)) {
+			this.group = GROUP_H;
+		} else if (code.equals(CODE_MEX)) {
+			this.group = GROUP_A;
+		} else if (code.equals(CODE_NED)) {
+			this.group = GROUP_B;
+		} else if (code.equals(CODE_NGA)) {
+			this.group = GROUP_F;
+		} else if (code.equals(CODE_POR)) {
+			this.group = GROUP_G;
+		} else if (code.equals(CODE_RUS)) {
+			this.group = GROUP_H;
+		} else if (code.equals(CODE_SUI)) {
+			this.group = GROUP_E;
+		} else if (code.equals(CODE_URU)) {
+			this.group = GROUP_D;
+		} else if (code.equals(CODE_USA)) {
+			this.group = GROUP_G;
+		}
+	}
+	
 	/**
 	 * Based on team code, initialize nation flag resource ID
 	 * */
