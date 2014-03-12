@@ -20,7 +20,7 @@ public class DatabaseWC extends SQLiteOpenHelper {
 
 	private static final String TABLE_STANDING = "standing";
 	private static final String COL_CODE = "code";
-	private static final String COL_GROUP = "group";
+	private static final String COL_GROUP = "group_code";
 	private static final String COL_MP = "match_played";
 	private static final String COL_W = "win";
 	private static final String COL_D = "draw";
@@ -29,33 +29,36 @@ public class DatabaseWC extends SQLiteOpenHelper {
 	private static final String COL_GA = "goal_against";
 	private static final String COL_PTS = "point";
 
-	private static final String CREATE_TABLE_STANDING = "CREATE IF NOT EXISTS TABLE "
+	private static final String CREATE_TABLE_STANDING = "CREATE TABLE IF NOT EXISTS "
 			+ TABLE_STANDING
 			+ "("
 			+ COL_CODE
-			+ " TEXT PRIMARY KEY,"
+			+ " TEXT PRIMARY KEY, "
 			+ COL_GROUP
-			+ " TEXT,"
+			+ " TEXT, "
 			+ COL_MP
-			+ " INTEGER,"
+			+ " INTEGER, "
 			+ COL_W
-			+ " INTEGER,"
+			+ " INTEGER, "
 			+ COL_D
-			+ " INTEGER,"
+			+ " INTEGER, "
 			+ COL_L
-			+ " INTEGER,"
+			+ " INTEGER, "
 			+ COL_GF
-			+ " INTEGER,"
-			+ COL_GA + " INTEGER," + COL_PTS + " INTEGER)";
+			+ " INTEGER, "
+			+ COL_GA + " INTEGER, " + COL_PTS + " INTEGER)";
 
 	public DatabaseWC(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
+		this.getWritableDatabase();
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		Log.d("TienVV", "onCreate");
 		db.execSQL(CREATE_TABLE_STANDING);
 		initTable(db);
+		Log.d("TienVV", "init table");
 	}
 
 	/**

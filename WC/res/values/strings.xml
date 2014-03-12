@@ -9,6 +9,7 @@
 
     <!-- Title actionbar -->
     <string name="title_team_selection">Select favorite team</string>
+    <string name="title_group">Group</string>
     
     <!-- BUTTOM TITLE -->
     <string name="btn_select_team_favorite">Select your team</string>
@@ -16,4 +17,23 @@
     <string name="btn_schedule">Schedule</string>
     <string name="btn_done">Done</string>
     <string name="btn_cancel">Cancel</string>
+    
+    <!-- MATCH TITLE -->
+    <string name="btn_match_team">MATCH</string>
+    <string name="btn_match_group">GROUP STAGE</string>
+    <string name="btn_match_round_16">ROUND OF 16</string>
+    <string name="btn_match_quarter_final">QUARTER-FINALS</string>
+    <string name="btn_match_semi_final">SEMI-FINALS</string>
+    <string name="btn_match_third">THIRD PLACE</string>
+    <string name="btn_match_final">FINAL</string>
+    
+    <!-- TABLE STANDING TITLE -->
+    <string name="standing_team">Team</string>
+    <string name="standing_match_played">MP</string>
+    <string name="standing_win">W</string>
+    <string name="standing_draw">D</string>
+    <string name="standing_lose">L</string>
+    <string name="standing_goal_for">GF</string>
+    <string name="standing_goal_againts">GA</string>
+    <string name="standing_points">Pts</string>
 </resources>

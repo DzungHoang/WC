@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.entity.TextViewWC;
 import lod.entertainment.wc.utils.PreferenceUtils;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 public class HomeActivity extends Activity implements OnClickListener {
 
 	private Context mContext;
+	private DatabaseWC mDatabase;
 	private WCApplication mApplication;
 	
 	private TextViewWC mTvTimeDaysHours;
@@ -57,6 +59,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 		initCountDownTime();
 		// Initiate data on screen
 		initData();
+		
+		mDatabase = new DatabaseWC(mContext);
 	}
 
 	/**
@@ -179,14 +183,15 @@ public class HomeActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_home_group:
-			// TODO:
+			Intent intentGroup = new Intent(mContext, GroupActivity.class);
+			startActivity(intentGroup);
 			break;
 		case R.id.btn_home_schedule:
 			// TODO:
 			break;
 		case R.id.btn_home_team:
 //			if (mApplication.getTeamFavorite() == null) {
-				Intent intentSelectFavoriteTeam = new Intent(getApplicationContext(), TeamFavoriteSelectActivity.class);
+				Intent intentSelectFavoriteTeam = new Intent(mContext, TeamFavoriteSelectActivity.class);
 				startActivityForResult(intentSelectFavoriteTeam, CODE_SELECT_TEAM);
 //			}
 			break;
@@ -220,4 +225,10 @@ public class HomeActivity extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mDatabase.close();
+		Log.d("TienVV", "destroy");
+	}
 }

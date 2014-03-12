@@ -29,7 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="lod.entertainment.wc.TeamFavoriteSelectActivity" >
+        <activity
+            android:name="lod.entertainment.wc.TeamFavoriteSelectActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="lod.entertainment.wc.GroupActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.google.ads.AdActivity"
