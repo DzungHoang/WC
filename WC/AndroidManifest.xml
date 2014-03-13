@@ -36,6 +36,14 @@
             android:name="lod.entertainment.wc.GroupActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity 
+            android:name="lod.entertainment.wc.ScheduleActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:name="lod.entertainment.wc.TeamDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />

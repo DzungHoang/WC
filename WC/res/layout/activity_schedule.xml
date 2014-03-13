@@ -1,88 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/frm_schedule_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
+    </FrameLayout>
 
-        <Button
-            android:id="@+id/btn_schedule_match_team"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_team" />
-
-        <Button
-            android:id="@+id/btn_schedule_match_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_schedule_match_team"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_group" />
-
-        <Button
-            android:id="@+id/btn_schedule_match_round_16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_schedule_match_group"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_round_16" />
-
-        <Button
-            android:id="@+id/btn_schedule_match_quarter_final"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_schedule_match_round_16"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_quarter_final" />
-
-        <Button
-            android:id="@+id/btn_schedule_match_semi_final"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_schedule_match_quarter_final"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_semi_final" />
-
-        <Button
-            android:id="@+id/btn_schedule_match_third_place"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_schedule_match_semi_final"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_third" />
-
-        <Button
-            android:id="@+id/btn_schedule_match_final"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_schedule_match_third_place"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/btn_match_final" />
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

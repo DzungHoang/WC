@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btn_schedule_match_team"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_team"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_schedule_match_group"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_schedule_match_team"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_group"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_schedule_match_round_16"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_schedule_match_group"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_round_16"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_schedule_match_quarter_final"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_schedule_match_round_16"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_quarter_final"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_schedule_match_semi_final"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_schedule_match_quarter_final"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_semi_final"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_schedule_match_third_place"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_schedule_match_semi_final"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_third"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_schedule_match_final"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_schedule_match_third_place"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_menu"
+            android:gravity="center"
+            android:text="@string/btn_match_final"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</ScrollView>

@@ -7,6 +7,10 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
 
+    <string name="title_fragment_schedule">Fixtures</string>
+    <string name="title_fragment_profile">Profile</string>
+    <string name="title_fragment_standing">Standings</string>
+    
     <!-- Title actionbar -->
     <string name="title_team_selection">Select favorite team</string>
     <string name="title_group">Group</string>
@@ -36,4 +40,7 @@
     <string name="standing_goal_for">GF</string>
     <string name="standing_goal_againts">GA</string>
     <string name="standing_points">Pts</string>
+    
+    <!-- NOTES -->
+    <string name="note_time_zone_schedule">Time is displayed in your timezone</string>
 </resources>

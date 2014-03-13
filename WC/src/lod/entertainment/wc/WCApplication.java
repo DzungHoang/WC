@@ -74,6 +74,66 @@ public class WCApplication extends Application{
 	}
 	
 	/**
+	 * Get list game schedule of a team
+	 * @param teamCode Team's code
+	 * @return
+	 */
+	public List<GameInfo> getGameScheduleOfTeam(String teamCode) {
+		List<GameInfo> list = new ArrayList<GameInfo>();
+		if (teamCode == null || teamCode.length() == 0) {
+			return list;
+		}
+		for (GameInfo game : mGameScheduleList) {
+			TeamInfo team1 = game.getTeam1();
+			TeamInfo team2 = game.getTeam2();
+			if (teamCode.equals(team1.getCode()) || teamCode.equals(team2.getCode())) {
+				list.add(game);
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * Get list game schedule of a group
+	 * @param group Group's code
+	 * @return
+	 */
+	public List<GameInfo> getGameScheduleOfGroup(String group) {
+		List<GameInfo> list = new ArrayList<GameInfo>();
+		if (group == null || group.length() == 0) {
+			return list;
+		}
+		// Group match from 1->48
+		for (int i = 0; i < 48; i++){
+			GameInfo game = mGameScheduleList.get(i);
+			TeamInfo team1 = game.getTeam1();
+			if (group.equals(team1.getGroup())) {
+				list.add(game);
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * Get list game schedule in range of match number
+	 * Example: group match from 1-48
+	 * Round of 16 from 49-56
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public List<GameInfo> getGameScheduleInRange(int from, int to) {
+		List<GameInfo> list = new ArrayList<GameInfo>();
+		if (!(to >= from) || from < 1) {
+			return list;
+		}
+		for (int i = (from - 1); i < to; i++){
+			list.add(mGameScheduleList.get(i));
+		}
+		return list;
+	}
+	
+	/**
 	 * Get team info by team's key
 	 * @param key
 	 * @return Team info object
@@ -125,5 +185,23 @@ public class WCApplication extends Application{
 	public void setTeamFavorite(String keyTeam) {
 		mPrefUtils.setTeamFavorite(keyTeam);
 		mTeamFavorite = getTeamByCode(keyTeam);
+	}
+	
+	/**
+	 * Get list of team in a group
+	 * @param group Group's code
+	 * @return
+	 */
+	public List<TeamInfo> getListTeamFromGroup(String group) {
+		List<TeamInfo> listTeam = new ArrayList<TeamInfo>();
+		if (group == null || group.length() == 0) {
+			return listTeam;
+		}
+		for (TeamInfo team : mTeamList) {
+			if (group.equals(team.getGroup())) {
+				listTeam.add(team);
+			}
+		}
+		return listTeam;
 	}
 }

@@ -209,7 +209,7 @@ public class TeamInfo {
 		} else if (code.equals(CODE_USA)) {
 			return R.drawable.flag_united_states_of_america;
 		} else {
-			return R.drawable.flag_brazil;
+			return R.drawable.icon_flag_no;
 		}
 	}
 	/**

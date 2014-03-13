@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/frm_details_team_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+
+        <ImageView
+            android:id="@+id/img_details_team_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="15dp" />
+
+        <TextView
+            android:id="@+id/tv_details_team_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img_details_team_logo"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/frm_details_team_title"
+        android:layout_marginTop="15dp" >
+
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/pager_title_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="#33b5e5"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:textColor="#ffffff" />
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

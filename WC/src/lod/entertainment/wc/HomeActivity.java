@@ -187,13 +187,18 @@ public class HomeActivity extends Activity implements OnClickListener {
 			startActivity(intentGroup);
 			break;
 		case R.id.btn_home_schedule:
-			// TODO:
+			Intent intentSchedule = new Intent(mContext, ScheduleActivity.class);
+			startActivity(intentSchedule);
 			break;
 		case R.id.btn_home_team:
-//			if (mApplication.getTeamFavorite() == null) {
+			if (mApplication.getTeamFavorite() == null) {
 				Intent intentSelectFavoriteTeam = new Intent(mContext, TeamFavoriteSelectActivity.class);
 				startActivityForResult(intentSelectFavoriteTeam, CODE_SELECT_TEAM);
-//			}
+			} else {
+				Intent i = new Intent(getApplicationContext(), TeamDetailActivity.class);
+				i.putExtra(TeamDetailActivity.KEY_TEAM_CODE, mApplication.getTeamFavorite().getCode());
+				startActivity(i);
+			}
 			break;
 		case R.id.btn_home_facebook:
 			// TODO:

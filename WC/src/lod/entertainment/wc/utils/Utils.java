@@ -8,10 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
@@ -308,5 +311,27 @@ public class Utils {
 	     Calendar calendar = Calendar.getInstance();
 	     calendar.setTimeInMillis(milliSeconds);
 	     return formatter.format(calendar.getTime());
+	}
+
+	/**
+	 * Convert date time on GMT-3 (in Brazil) to date time in User's TimeZone
+	 * @param date
+	 * @param time
+	 * @return
+	 */
+	public static String getDateAsTimeZone(String date, String time) {
+		String result = date.concat(" ").concat(time);
+		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		formatter.setTimeZone(TimeZone.getTimeZone("GMT-3"));
+		try {
+			Date d = formatter.parse(result);
+			formatter.setTimeZone(TimeZone.getDefault());
+			result = formatter.format(d);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }
