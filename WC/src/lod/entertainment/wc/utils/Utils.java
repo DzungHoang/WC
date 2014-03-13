@@ -1,5 +1,6 @@
 package lod.entertainment.wc.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -258,6 +259,8 @@ public class Utils {
 		try{
 		InputStream inputStream = context.getAssets().open(pathInAsset);
 		String parent = context.getExternalFilesDir(null).getAbsolutePath();
+		File file = new File(parent + "/" + pathInAsset);
+		if(file.exists()) return; //not overwrite the file if existed
 		OutputStream output = new FileOutputStream(parent + "/" + pathInAsset);
 
 		// transfer bytes from the inputfile to the outputfile
