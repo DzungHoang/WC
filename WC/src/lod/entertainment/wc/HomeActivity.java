@@ -5,13 +5,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import lod.entertainment.wc.data.DatabaseWC;
+import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.entity.TextViewWC;
 import lod.entertainment.wc.utils.PreferenceUtils;
+import lod.entertainment.wc.utils.Utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -168,6 +171,18 @@ public class HomeActivity extends Activity implements OnClickListener {
 				}
 			};
 			timer.start();
+		}else{
+			//This case is when the WC is started
+			//Then we display the today's matches
+			List<GameInfo> todayMatches = Utils.matchesToday(mApplication.getGameSchedule());
+			if(todayMatches != null && todayMatches.size() > 0){
+				//Todo: TienVV make it display beautiful :))
+				String msg = "Today has " + todayMatches.size() + " matches!";
+				mTvTimeDaysHours.setText(msg);
+			}else{
+				String abc = "Today has no match!";
+				mTvTimeDaysHours.setText(abc);
+			}
 		}
 	}
 
@@ -205,6 +220,9 @@ public class HomeActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btn_home_setting:
 			// TODO:
+			Intent intent = new Intent("lod.entertainment.wc.TEST_ACTION");
+			Log.d("DungHV","send broad cast");
+			sendBroadcast(intent);
 			break;
 		case R.id.btn_home_info:
 			// TODO:

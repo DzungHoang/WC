@@ -20,27 +20,12 @@ public class MatchdayNotificationReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
-		if (action.equals(Intent.ACTION_DATE_CHANGED)) {
+//		if (action.equals(Intent.ACTION_DATE_CHANGED)) {
 			String gameString = Utils.loadJSONFromAsset(context,
 					"schedule.json");
 			List<GameInfo> gameScheduleList = Utils
 					.parseGameSchedule(gameString);
-			List<GameInfo> todayGames;
-			if (gameScheduleList != null) {
-				for (int i = 0; i < gameScheduleList.size(); i++) {
-					GameInfo temp = gameScheduleList.get(i);
-					String date = temp.getDate();
-
-					Calendar c = Calendar.getInstance();
-					SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-					String formattedDate = df.format(c.getTime());
-
-					if (!date.equals(formattedDate)) {
-						gameScheduleList.remove(i);
-						i--;
-					}
-				}
-			}
+			gameScheduleList = Utils.matchesToday(gameScheduleList);
 			if (gameScheduleList != null && gameScheduleList.size() > 0) {
 				NotificationManager notificationManager = (NotificationManager) context
 						.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -70,6 +55,6 @@ public class MatchdayNotificationReceiver extends BroadcastReceiver {
 				}
 			}
 		}
-	}
+//	}
 
 }

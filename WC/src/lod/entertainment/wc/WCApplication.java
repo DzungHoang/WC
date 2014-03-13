@@ -23,9 +23,6 @@ public class WCApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Intent intent =  new Intent();
-		intent.setClass(getApplicationContext(), MyService.class);
-		startService(intent);
 		
 		// Read match schedule list
 		long times = System.currentTimeMillis();

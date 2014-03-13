@@ -334,4 +334,24 @@ public class Utils {
 		
 		return result;
 	}
+	
+	public static List<GameInfo> matchesToday(List<GameInfo> allMatches){
+		List<GameInfo> tempMatches = new ArrayList<GameInfo>();
+		
+		if (allMatches != null) {
+			for (int i = 0; i < allMatches.size(); i++) {
+				GameInfo temp = allMatches.get(i);
+				String date = temp.getDate();
+
+				Calendar c = Calendar.getInstance();
+				SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+				String formattedDate = df.format(c.getTime());
+
+				if (date.equals(formattedDate)) {
+					tempMatches.add(allMatches.get(i));
+				}
+			}
+		}
+		return tempMatches;
+	}
 }
