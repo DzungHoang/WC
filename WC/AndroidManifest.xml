@@ -48,6 +48,12 @@
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <service android:name=".data.UpdateDataService"></service>
+        <receiver android:name=".receiver.MatchdayNotificationReceiver">
+            <intent-filter >
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+                <action android:name="lod.entertainment.wc.TEST_ACTION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
