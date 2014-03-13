@@ -5,6 +5,10 @@ import java.util.Date;
 import android.text.format.Time;
 
 public class GameInfo {
+	
+	// Match index (in range 1-64)
+	private int index;
+	
 	//These information is related to schedule
 	private TeamInfo team1;
 	private TeamInfo team2;
@@ -33,5 +37,53 @@ public class GameInfo {
 	
 	public GameInfo(){
 		state = GAME_NOT_START;
+		// Default score is -1, match not stated
+		score1 = -1;
+		score2 = -1;
+	}
+	
+	public GameInfo(int index, TeamInfo team1, TeamInfo team2, String startDate, String startTime) {
+		super();
+		this.index = index;
+		this.team1 = team1;
+		this.team2 = team2;
+		this.startDate = startDate;
+		this.startTime = startTime;
+	}
+	
+	public int getIndex() {
+		return this.index;
+	}
+	
+	public TeamInfo getTeam1() {
+		return this.team1;
+	}
+	
+	public TeamInfo getTeam2() {
+		return this.team2;
+	}
+	
+	public String getDate() {
+		return this.startDate;
+	}
+	
+	public String getTime() {
+		return this.startTime;
+	}
+	
+	public int getState() {
+		return this.state;
+	}
+	
+	public String getStadium() {
+		return this.stadium;
+	}
+	
+	public int getScore1() {
+		return this.score1;
+	}
+	
+	public int getScore2() {
+		return this.score2;
 	}
 }
