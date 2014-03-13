@@ -9,12 +9,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -151,6 +153,39 @@ public class Utils {
 //			}
 //		}
 //	}
+	public static List<GameInfo> parseGameSchedule(String json) {
+		List<GameInfo> listResult = new ArrayList<GameInfo>();
+		if (json == null || json.length() == 0) {
+			return listResult;
+		}
+		
+		try {
+			JSONObject object = new JSONObject(json);
+			JSONArray arrGame = object.getJSONArray("games");
+			if (arrGame != null) {
+				for (int i = 0; i < arrGame.length(); i++) {
+					JSONObject game = arrGame.getJSONObject(i);
+					int index = Integer.parseInt(game.getString("game_index"));
+					String team1Key = game.getString("team1_key");
+					String team1Code = game.getString("team1_code");
+					String team1Title = game.getString("team1_title");
+					String team2Key = game.getString("team2_key");
+					String team2Code = game.getString("team2_code");
+					String team2Title = game.getString("team2_title");
+					String date = game.getString("play_at");
+					String time  = game.getString("time");
+					
+					TeamInfo team1 = new TeamInfo(team1Key, team1Title, team1Code);
+					TeamInfo team2 = new TeamInfo(team2Key, team2Title, team2Code);
+					
+					GameInfo item = new GameInfo(index, team1, team2, date, time);
+					listResult.add(item);
+				}
+			}
+		} catch (JSONException e) {
+		}
+		return listResult;
+	}
 	/**
 	 * Copy file from asset to SD card. Path in asset: asset/games_round_1.json
 	 * Path in SD: path_to_SD/games_round_1.json

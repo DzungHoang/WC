@@ -3,6 +3,7 @@ package lod.entertainment.wc;
 import java.util.ArrayList;
 import java.util.List;
 
+import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.utils.PreferenceUtils;
@@ -16,14 +17,25 @@ public class WCApplication extends Application{
 	private TeamInfo mTeamFavorite = null;
 	private PreferenceUtils mPrefUtils;
 	
-	ArrayList<TeamInfo> mTeamList;
-	ArrayList<MatchDayInfo> mMatchDayList;
+	private ArrayList<TeamInfo> mTeamList;
+	private ArrayList<MatchDayInfo> mMatchDayList;
+	private List<GameInfo> mGameScheduleList;
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		Intent intent =  new Intent();
 		intent.setClass(getApplicationContext(), MyService.class);
 		startService(intent);
+		
+		// Read match schedule list
+		long times = System.currentTimeMillis();
+		Log.d("DungHV", "start ");
+		String gameString = Utils.loadJSONFromAsset(this, "schedule.json");
+		Log.d("TienVV", "game string: " + gameString);
+		mGameScheduleList = Utils.parseGameSchedule(gameString);
+		Log.d("TienVV", "game size: " + mGameScheduleList.size());
+		long timee = System.currentTimeMillis();
+		Log.d("TienVV", "range mili: " + (timee - times));
 		
 		long time = System.currentTimeMillis();
 		String jsonString = Utils.loadJSONFromAsset(this, "team_list.json");
@@ -47,6 +59,10 @@ public class WCApplication extends Application{
 	
 	public List<TeamInfo> getListTeam() {
 		return mTeamList;
+	}
+	
+	public List<GameInfo> getGameSchedule() {
+		return mGameScheduleList;
 	}
 	
 	/**
