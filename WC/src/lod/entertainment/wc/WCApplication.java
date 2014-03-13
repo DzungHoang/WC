@@ -48,13 +48,21 @@ public class WCApplication extends Application{
 		mMatchDayList = Utils.parseMatchDayList(matchString);
 		Log.d("DungHV","matchList.length() = " + mMatchDayList.size());
 		
-		long gap = System.currentTimeMillis() - time;
-		Log.d("DungHV","gap = " + gap);
-		
 		// Read team favorite from preferences
 		mPrefUtils = new PreferenceUtils(getApplicationContext());
 		String keyTeam = mPrefUtils.getTeamFavorite();
 		mTeamFavorite = getTeamByCode(keyTeam);
+		
+		for(int i = 1; i<21; i++){
+			Utils.copyFromAssetToSD(this, "games_round_"+ i + ".json");
+		}
+				
+		long gap = System.currentTimeMillis() - time;
+		Log.d("DungHV","gap = " + gap);
+	}
+	
+	public void updateGameResult(){
+		Utils.updateGameResults(this, "games_round_2.json", mGameScheduleList);
 	}
 	
 	public List<TeamInfo> getListTeam() {

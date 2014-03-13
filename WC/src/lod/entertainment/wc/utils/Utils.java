@@ -1,5 +1,6 @@
 package lod.entertainment.wc.utils;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +34,35 @@ public class Utils {
 
 			InputStream is = context.getAssets().open(fileName);
 
+			int size = is.available();
+
+			byte[] buffer = new byte[size];
+
+			is.read(buffer);
+
+			is.close();
+
+			json = new String(buffer, "UTF-8");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		return json;
+
+	}
+	
+	/**
+	 * Load a json file in external storage folder
+	 * 
+	 * @return json string
+	 * */
+	public static String loadJSONFromExternal(Context context, String fileName) {
+		String json = null;
+		try {
+			String parent = context.getExternalFilesDir(null).getAbsolutePath();
+			InputStream is = new FileInputStream(parent+"/" + fileName);
+			
 			int size = is.available();
 
 			byte[] buffer = new byte[size];
@@ -118,41 +148,75 @@ public class Utils {
 		return result;
 
 	}
-
 	/**
-	 * Parse game list from a json String
-	 * 
-	 * @return An ArrayList of GameInfo
+	 * This method update GameInfo in list.
+	 * It should be called only for match on current day, not for a batch of update all GameInfo
 	 * */
-//	public static void parseGameList(ArrayList<GameInfo> gameList, String json) {
-//		if (gameList == null) gameList = new ArrayList<GameInfo>();
-//		
-//		
-//		ArrayList<TeamInfo> result = new ArrayList<TeamInfo>();
-//		if (json != null) {
-//			try {
-//				JSONObject jsonObject = new JSONObject(json);
-//				JSONArray gameTeam = jsonObject.getJSONArray("games");
-//				if (gameTeam != null) {
-//					for (int i = 0; i < gameTeam.length(); i++) {
-//						JSONObject game = gameTeam.getJSONObject(i);
-//						if (game != null) {
-//							String key = team.getString("key");
-//							String name = team.getString("title");
-//							String code = team.getString("code");
-//							String group = team.getString("group");
-//
-//							TeamInfo tempTeam = new TeamInfo(key, name, code,
-//									group);
-//							result.add((TeamInfo) tempTeam);
-//						}
-//					}
-//				}
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	public static void updateGameResults(Context context, String fileName, List<GameInfo> gameInfoList){
+		if ((gameInfoList == null) || (context == null) || (fileName == null)) return;
+		String jsonString = loadJSONFromExternal(context, fileName);
+		if(jsonString != null){
+			try{
+				JSONObject jsonObject = new JSONObject(jsonString);
+				if(jsonObject != null){
+					JSONArray games = jsonObject.getJSONArray("games");
+					if(games!=null){
+						for (int i = 0; i < games.length(); i++){
+							JSONObject game = games.getJSONObject(i);
+							if(game != null){
+								int score1 = game.getInt("score1");
+								//hard code to detect the real score
+								//because currently, score1 is the time of match 
+								//ex: score1 = 13 => match start at 13:00
+								//besides, the real score is really rare to be equal "13 - 0" =))))))
+								if(Integer.valueOf(score1).intValue() < 13){
+									String team1_code = game.getString("team1_code");
+									String team2_code = game.getString("team2_code");
+									GameInfo temp = findGame(team1_code, team2_code, gameInfoList);
+									if(temp != null){
+										int score2 = -1;
+										int score1ext = -1;
+										int score2ext = -1;
+										int score1p = -1;
+										int score2p = -1;
+										try{
+											score2 = game.getInt("score2");
+											score1ext = game.getInt("score1ot");
+											score2ext = game.getInt("score2ot");
+											score1p = game.getInt("score1p");
+											score2p = game.getInt("score2p");
+										}catch (Exception e) {
+											e.printStackTrace();
+										}finally{
+											temp.setScore(score1, score2, score1ext, score2ext, score1p, score2p);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * Find the game in list, based on team_code
+	 * @return the equivalent GameInfo
+	 * */
+	private static GameInfo findGame(String team1_code, String team2_code, List<GameInfo> gameList){
+		if(gameList == null) return null;
+		GameInfo ret = null;
+		for (int i = 0; i < gameList.size(); i++){
+			GameInfo temp = gameList.get(i);
+			if(team1_code.equals(temp.getTeam1().getCode())
+					&& team2_code.equals(temp.getTeam2().getCode())){
+				ret = temp;
+			}
+		}
+		return ret;
+	}
 	public static List<GameInfo> parseGameSchedule(String json) {
 		List<GameInfo> listResult = new ArrayList<GameInfo>();
 		if (json == null || json.length() == 0) {

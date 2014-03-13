@@ -24,7 +24,10 @@ public class GameInfo {
 	//These information is related to result
 	private int score1;
 	private int score2;
-	
+	private int score1ext;
+	private int score2ext;
+	private int score1p;
+	private int score2p;
 	public static int GAME_NOT_START = 0;		//Start later than tomorrow
 	public static int GAME_COMMING = 1;			//Start today
 	public static int GAME_STARTED = 2;			//Started
@@ -35,15 +38,19 @@ public class GameInfo {
 	public static int GAME_PEN = 7;					//End of Penalty
 	private int state;
 	
-	public GameInfo(){
+	private void initScore(){
 		state = GAME_NOT_START;
 		// Default score is -1, match not stated
 		score1 = -1;
 		score2 = -1;
+		score1ext = -1;
+		score2ext = -1;
+		score1p = -1;
+		score2p = -1;
 	}
 	
 	public GameInfo(int index, TeamInfo team1, TeamInfo team2, String startDate, String startTime) {
-		super();
+		initScore();
 		this.index = index;
 		this.team1 = team1;
 		this.team2 = team2;
@@ -85,5 +92,13 @@ public class GameInfo {
 	
 	public int getScore2() {
 		return this.score2;
+	}
+	public void setScore(int score1, int score2, int score1ext, int score2ext, int score1p, int score2p){
+		this.score1 = score1;
+		this.score2 = score2;
+		this.score1ext = score1ext;
+		this.score2ext = score2ext;
+		this.score1p = score1p;
+		this.score2p = score2p;
 	}
 }
