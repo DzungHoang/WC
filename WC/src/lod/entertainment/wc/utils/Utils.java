@@ -334,14 +334,18 @@ public class Utils {
 		
 		return result;
 	}
-	
+
+	/**
+	 * Get the list of matches in today
+	 * */
 	public static List<GameInfo> matchesToday(List<GameInfo> allMatches){
 		List<GameInfo> tempMatches = new ArrayList<GameInfo>();
 		
 		if (allMatches != null) {
 			for (int i = 0; i < allMatches.size(); i++) {
 				GameInfo temp = allMatches.get(i);
-				String date = temp.getDate();
+				String date = getDateAsTimeZone(temp.getDate(),temp.getTime());
+				date = date.substring(0, 9);
 
 				Calendar c = Calendar.getInstance();
 				SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
