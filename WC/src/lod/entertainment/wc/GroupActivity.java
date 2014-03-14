@@ -5,15 +5,15 @@ import java.util.List;
 import lod.entertainment.wc.adapter.AdapterListTeamStanding;
 import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.TeamStanding;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class GroupActivity extends ActionBarActivity implements OnItemClickListener{
+public class GroupActivity extends Activity implements OnItemClickListener{
 
 	private DatabaseWC mDatabase;
 	private ListView mLvListTeam;
@@ -24,7 +24,7 @@ public class GroupActivity extends ActionBarActivity implements OnItemClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_group);
-		getActionBar().setTitle(R.string.title_group);
+		setTitle(R.string.title_group);
 		mDatabase = new DatabaseWC(this);
 		// Initiate layout
 		initLayout();

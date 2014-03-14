@@ -59,8 +59,10 @@ public class AdapterListSchedule extends BaseAdapter{
 			viewHolder = new ViewHolder();
 			
 			viewHolder.tvGroupTitle = (TextView) convertView.findViewById(R.id.item_tv_schedule_group_title);
+			viewHolder.tvMatchId = (TextView) convertView.findViewById(R.id.item_tv_schedule_match_id); 
 			viewHolder.tvTime = (TextView) convertView.findViewById(R.id.item_tv_schedule_time);
 			viewHolder.tvResult = (TextView) convertView.findViewById(R.id.item_tv_schedule_result);
+			viewHolder.tvResultPen = (TextView) convertView.findViewById(R.id.item_tv_schedule_result_pen);
 			viewHolder.imgTeam1 = (ImageView) convertView.findViewById(R.id.item_img_schedule_team_1);
 			viewHolder.tvTeam1 = (TextView) convertView.findViewById(R.id.item_tv_schedule_team_1);
 			viewHolder.imgTeam2 = (ImageView) convertView.findViewById(R.id.item_img_schedule_team_2);
@@ -114,11 +116,18 @@ public class AdapterListSchedule extends BaseAdapter{
 				viewHolder.tvGroupTitle.setVisibility(View.GONE);
 			}
 		}
+		viewHolder.tvMatchId.setText("M".concat(String.valueOf(game.getIndex())));
 		viewHolder.tvTime.setText(Utils.getDateAsTimeZone(game.getDate(), game.getTime()).replace("2014/", ""));
 		if (game.getScore1() < 0) {
 			viewHolder.tvResult.setText("-");
 		} else {
-			viewHolder.tvResult.setText(String.valueOf(game.getScore1()).concat(" - ").concat(String.valueOf(game.getScore2())));
+			viewHolder.tvResult.setText(String.valueOf(game.getScore1() + game.getScore1Ext()).concat(" - ").concat(String.valueOf(game.getScore2() + game.getScore2Ext())));
+		}
+		if (game.getScore1p() == -1) {
+			viewHolder.tvResultPen.setVisibility(View.GONE);
+		} else {
+			viewHolder.tvResultPen.setVisibility(View.VISIBLE);
+			viewHolder.tvResultPen.setText("(" + game.getScore1p() + " - " + game.getScore2p() + ")");
 		}
 		if (team1.getCode() != null) {
 			viewHolder.imgTeam1.setImageResource(TeamInfo.getFlagResource(team1.getCode()));
@@ -138,8 +147,10 @@ public class AdapterListSchedule extends BaseAdapter{
 
 	class ViewHolder {
 		TextView tvGroupTitle;
+		TextView tvMatchId;
 		TextView tvTime;
 		TextView tvResult;
+		TextView tvResultPen;
 		ImageView imgTeam1;
 		TextView tvTeam1;
 		ImageView imgTeam2;

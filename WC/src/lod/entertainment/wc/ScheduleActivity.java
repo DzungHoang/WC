@@ -8,12 +8,13 @@ import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.fragment.FragmentScheduleList;
 import lod.entertainment.wc.fragment.FragmentScheduleMenu;
 import lod.entertainment.wc.fragment.FragmentScheduleMenu.OnMenuClickListener;
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.FrameLayout;
 
-public class ScheduleActivity extends ActionBarActivity implements
+public class ScheduleActivity extends FragmentActivity implements
 		OnMenuClickListener {
 
 	private WCApplication mApplication;

@@ -101,4 +101,20 @@ public class GameInfo {
 		this.score1p = score1p;
 		this.score2p = score2p;
 	}
+	
+	public int getScore1Ext() {
+		return this.score1ext;
+	}
+	
+	public int getScore2Ext() {
+		return this.score2ext;
+	}
+	
+	public int getScore1p() {
+		return this.score1p;
+	}
+	
+	public int getScore2p() {
+		return this.score2p;
+	}
 }

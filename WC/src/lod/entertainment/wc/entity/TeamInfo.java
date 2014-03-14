@@ -212,6 +212,80 @@ public class TeamInfo {
 			return R.drawable.icon_flag_no;
 		}
 	}
+	
+	/**
+	 * Based on team code, initialize thumbs resource
+	 * */
+	public static int getThumbResource(String code){
+		if (code.equals(CODE_ALG)) {
+			return R.drawable.thumb_alg;
+		} else if (code.equals(CODE_ARG)) {
+			return R.drawable.thumb_arg;
+		} else if (code.equals(CODE_AUS)) {
+			return R.drawable.thumb_aus;
+		} else if (code.equals(CODE_BEL)) {
+			return R.drawable.thumb_bel;
+		} else if (code.equals(CODE_BIH)) {
+			return R.drawable.thumb_bih;
+		} else if (code.equals(CODE_BRA)) {
+			return R.drawable.thumb_bra;
+		} else if (code.equals(CODE_CHI)) {
+			return R.drawable.thumb_chi;
+		} else if (code.equals(CODE_CIV)) {
+			return R.drawable.thumb_civ;
+		} else if (code.equals(CODE_CMR)) {
+			return R.drawable.thumb_cmr;
+		} else if (code.equals(CODE_COL)) {
+			return R.drawable.thumb_coljpg;
+		} else if (code.equals(CODE_CRC)) {
+			return R.drawable.thumb_crc;
+		} else if (code.equals(CODE_CRO)) {
+			return R.drawable.thumb_cro;
+		} else if (code.equals(CODE_ECU)) {
+			return R.drawable.thumb_ecu;
+		} else if (code.equals(CODE_ENG)) {
+			return R.drawable.thumb_eng;
+		} else if (code.equals(CODE_ESP)) {
+			return R.drawable.thumb_esp;
+		} else if (code.equals(CODE_FRA)) {
+			return R.drawable.thumb_fra;
+		} else if (code.equals(CODE_GER)) {
+			return R.drawable.thumb_ger;
+		} else if (code.equals(CODE_GHA)) {
+			return R.drawable.thumb_gha;
+		} else if (code.equals(CODE_GRE)) {
+			return R.drawable.thumb_gre;
+		} else if (code.equals(CODE_HON)) {
+			return R.drawable.thumb_hon;
+		} else if (code.equals(CODE_IRN)) {
+			return R.drawable.thumb_irn;
+		} else if (code.equals(CODE_ITA)) {
+			return R.drawable.thumb_ita;
+		} else if (code.equals(CODE_JPN)) {
+			return R.drawable.thumb_jpn;
+		} else if (code.equals(CODE_KOR)) {
+			return R.drawable.thumb_kor;
+		} else if (code.equals(CODE_MEX)) {
+			return R.drawable.thumb_mex;
+		} else if (code.equals(CODE_NED)) {
+			return R.drawable.thumb_ned;
+		} else if (code.equals(CODE_NGA)) {
+			return R.drawable.thumb_nga;
+		} else if (code.equals(CODE_POR)) {
+			return R.drawable.thumb_por;
+		} else if (code.equals(CODE_RUS)) {
+			return R.drawable.thumb_rus;
+		} else if (code.equals(CODE_SUI)) {
+			return R.drawable.thumb_sui;
+		} else if (code.equals(CODE_URU)) {
+			return R.drawable.thumb_uru;
+		} else if (code.equals(CODE_USA)) {
+			return R.drawable.thumb_usa;
+		} else {
+			return R.drawable.thumb_bra;
+		}
+	}
+	
 	/**
 	 * @return Team's nation name
 	 * */

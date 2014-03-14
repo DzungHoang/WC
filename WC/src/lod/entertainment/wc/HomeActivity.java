@@ -9,11 +9,16 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
+import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
+import com.google.ads.u;
+
+import lod.entertainment.wc.adapter.AdapterListScheduleLite;
 import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.entity.TextViewWC;
-import lod.entertainment.wc.utils.PreferenceUtils;
 import lod.entertainment.wc.utils.Utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,7 +33,10 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
@@ -36,6 +44,9 @@ public class HomeActivity extends Activity implements OnClickListener {
 	private DatabaseWC mDatabase;
 	private WCApplication mApplication;
 	
+	private ListView mLvNextMatch;
+	private AdapterListScheduleLite mAdapterNextMatch;
+	private RelativeLayout mFrmTime;
 	private TextViewWC mTvTimeDaysHours;
 	private TextViewWC mTvTimeMinutesSeconds;
 	private Button mBtnGroup;
@@ -70,6 +81,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 	 * Initiate layout
 	 */
 	private void initLayout() {
+		mLvNextMatch = (ListView) findViewById(R.id.lv_home_today);
+		mFrmTime = (RelativeLayout) findViewById(R.id.frm_home_time);
 		mTvTimeDaysHours = (TextViewWC) findViewById(R.id.tv_home_time_days_hours);
 		mTvTimeMinutesSeconds = (TextViewWC) findViewById(R.id.tv_home_time_minutes_second);
 		mBtnGroup = (Button) findViewById(R.id.btn_home_group);
@@ -141,17 +154,18 @@ public class HomeActivity extends Activity implements OnClickListener {
 		long timeCurrent = start.getTimeInMillis();
 		long timeEnd = destination.getTimeInMillis();
 		if (timeEnd > timeCurrent) {
+			mLvNextMatch.setVisibility(View.GONE);
 			CountDownTimer timer = new CountDownTimer(timeEnd - timeCurrent,
 					1000) {
 
 				@Override
 				public void onTick(long millisUntilFinished) {
 					long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-					long minutes = TimeUnit.SECONDS.toMinutes(seconds);
+					long minutes = seconds / 60;
 					seconds = seconds % 60;
-					long hours = TimeUnit.MINUTES.toHours(minutes);
+					long hours = minutes / 60;
 					minutes = minutes % 60;
-					long days = TimeUnit.HOURS.toDays(hours);
+					long days = hours / 24;
 					hours = hours % 24;
 					
 					mTvTimeDaysHours.setText(String.valueOf(days)
@@ -172,13 +186,18 @@ public class HomeActivity extends Activity implements OnClickListener {
 			};
 			timer.start();
 		}else{
+			mFrmTime.setVisibility(View.GONE);
 			//This case is when the WC is started
 			//Then we display the today's matches
 			List<GameInfo> todayMatches = Utils.matchesToday(mApplication.getGameSchedule());
 			if(todayMatches != null && todayMatches.size() > 0){
-				//Todo: TienVV make it display beautiful :))
+				// Todo: TienVV make it display beautiful :))
 				String msg = "Today has " + todayMatches.size() + " matches!";
 				mTvTimeDaysHours.setText(msg);
+//				mTvTimeDaysHours.setVisibility(View.GONE);
+				mTvTimeMinutesSeconds.setVisibility(View.GONE);
+				mAdapterNextMatch = new AdapterListScheduleLite(this, todayMatches);
+				mLvNextMatch.setAdapter(mAdapterNextMatch);
 			}else{
 				String abc = "Today has no match!";
 				mTvTimeDaysHours.setText(abc);
@@ -216,7 +235,11 @@ public class HomeActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.btn_home_facebook:
-			// TODO:
+			Toast.makeText(mContext, "dace", Toast.LENGTH_SHORT).show();
+			UiLifecycleHelper ui = new UiLifecycleHelper(this, null);
+			ShareDialogBuilder builder = new ShareDialogBuilder(this);
+			builder.setLink("https://play.google.com/store/apps/details?id=lod.game.goldmine");
+			ui.trackPendingDialogCall(builder.build().present());
 			break;
 		case R.id.btn_home_setting:
 			// TODO:

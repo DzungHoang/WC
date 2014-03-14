@@ -71,7 +71,7 @@ public class TeamDetailActivity extends FragmentActivity {
 		TeamInfo team = mApplication.getTeamByCode(mTeamCode);
 		
 		mImgTeamLogo.setImageResource(getLogoId(mTeamCode));
-		mTvTeamName.setText(team.getName().toUpperCase());
+		mTvTeamName.setText(team.getName().toUpperCase().concat(" (").concat(mTeamCode).concat(")"));
 		
 		
 		List<GameInfo> listGame = mApplication.getGameScheduleOfTeam(mTeamCode);

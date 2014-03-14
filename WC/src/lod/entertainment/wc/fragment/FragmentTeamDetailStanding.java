@@ -3,25 +3,28 @@ package lod.entertainment.wc.fragment;
 import java.util.List;
 
 import lod.entertainment.wc.R;
+import lod.entertainment.wc.TeamDetailActivity;
 import lod.entertainment.wc.adapter.AdapterListTeamStanding;
 import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.entity.TeamStanding;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class FragmentTeamDetailStanding extends Fragment {
+public class FragmentTeamDetailStanding extends Fragment implements
+		OnItemClickListener {
 
 	private static FragmentTeamDetailStanding INSTANCE = null;
 
 	public static FragmentTeamDetailStanding getInstance(TeamInfo team) {
-		if (INSTANCE == null) {
-			INSTANCE = new FragmentTeamDetailStanding();
-		}
+		INSTANCE = new FragmentTeamDetailStanding();
 		mTeam = team;
 		return INSTANCE;
 	}
@@ -29,7 +32,7 @@ public class FragmentTeamDetailStanding extends Fragment {
 	private static TeamInfo mTeam;
 	private List<TeamStanding> mListTeam;
 	private DatabaseWC mDatabase;
-	
+
 	private View mView;
 	private ListView mLvStanding;
 	private AdapterListTeamStanding mAdapterStanding;
@@ -46,6 +49,7 @@ public class FragmentTeamDetailStanding extends Fragment {
 				container, false);
 		mLvStanding = (ListView) mView
 				.findViewById(R.id.lv_team_detail_standing);
+		mLvStanding.setOnItemClickListener(this);
 		if (mAdapterStanding != null) {
 			mLvStanding.setAdapter(mAdapterStanding);
 		}
@@ -59,5 +63,17 @@ public class FragmentTeamDetailStanding extends Fragment {
 		mListTeam = mDatabase.getInfoStandingOfGroup(mTeam.getGroup());
 		mAdapterStanding = new AdapterListTeamStanding(getActivity(), mListTeam);
 		mLvStanding.setAdapter(mAdapterStanding);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapter, View v, int position,
+			long id) {
+		String codeTeam = mListTeam.get(position).getCode();
+		Intent i = new Intent(getActivity().getApplicationContext(),
+				TeamDetailActivity.class);
+		i.putExtra(TeamDetailActivity.KEY_TEAM_CODE, codeTeam);
+		startActivity(i);
+
+		getActivity().finish();
 	}
 }

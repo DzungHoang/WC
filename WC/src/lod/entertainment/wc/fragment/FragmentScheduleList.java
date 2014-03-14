@@ -29,9 +29,7 @@ public class FragmentScheduleList extends Fragment{
 	private static boolean isAteam;
 	
 	public static FragmentScheduleList getInstance(List<GameInfo> listGame, boolean grouped, boolean ateam) {
-		if (INSTANCE == null) {
-			INSTANCE = new FragmentScheduleList();
-		}
+		INSTANCE = new FragmentScheduleList();
 		mListSchedule = listGame;
 		isGrouped = grouped;
 		isAteam = ateam;

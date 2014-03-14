@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+    <com.google.ads.AdView
+        android:id="@+id/adViewScheduleList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_id"
+        ads:loadAdOnCreate="true" >
+    </com.google.ads.AdView>
 
     <TextView
         android:id="@+id/tv_schedule_list_time_zone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#868686"
+        android:layout_above="@id/adViewScheduleList"
+        android:background="@color/notes"
         android:gravity="center"
         android:textColor="@color/white" />
 
@@ -17,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/tv_schedule_list_time_zone"
-        android:clickable="false" >
+        android:clickable="false"
+        android:listSelector="@android:color/transparent" >
     </ListView>
 
 </RelativeLayout>
