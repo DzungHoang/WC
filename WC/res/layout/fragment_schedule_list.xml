@@ -4,22 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.google.ads.AdView
-        android:id="@+id/adViewScheduleList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/admob_id"
-        ads:loadAdOnCreate="true" >
-    </com.google.ads.AdView>
-
     <TextView
         android:id="@+id/tv_schedule_list_time_zone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/adViewScheduleList"
+        android:layout_alignParentBottom="true"
         android:background="@color/notes"
         android:gravity="center"
         android:textColor="@color/white" />

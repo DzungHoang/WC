@@ -40,10 +40,10 @@
     <ListView
         android:id="@+id/lv_team_favorite"
         android:layout_width="match_parent"
-        android:background="#fafafa"
         android:layout_height="match_parent"
         android:layout_above="@id/lnr_team_favorite_button"
         android:layout_alignParentTop="true"
+        android:background="#fafafa"
         android:dividerHeight="1dp" >
     </ListView>
 

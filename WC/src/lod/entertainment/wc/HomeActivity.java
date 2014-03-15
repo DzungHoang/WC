@@ -9,11 +9,6 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
-import com.google.ads.u;
-
 import lod.entertainment.wc.adapter.AdapterListScheduleLite;
 import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.GameInfo;
@@ -37,6 +32,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
@@ -186,19 +184,20 @@ public class HomeActivity extends Activity implements OnClickListener {
 			};
 			timer.start();
 		}else{
-			mFrmTime.setVisibility(View.GONE);
+//			mFrmTime.setVisibility(View.GONE);
 			//This case is when the WC is started
 			//Then we display the today's matches
 			List<GameInfo> todayMatches = Utils.matchesToday(mApplication.getGameSchedule());
 			if(todayMatches != null && todayMatches.size() > 0){
 				// Todo: TienVV make it display beautiful :))
-				String msg = "Today has " + todayMatches.size() + " matches!";
-				mTvTimeDaysHours.setText(msg);
-//				mTvTimeDaysHours.setVisibility(View.GONE);
+//				String msg = "Today has " + todayMatches.size() + " matches!";
+//				mTvTimeDaysHours.setText(msg);
+				mTvTimeDaysHours.setVisibility(View.GONE);
 				mTvTimeMinutesSeconds.setVisibility(View.GONE);
 				mAdapterNextMatch = new AdapterListScheduleLite(this, todayMatches);
 				mLvNextMatch.setAdapter(mAdapterNextMatch);
 			}else{
+				mLvNextMatch.setVisibility(View.GONE);
 				String abc = "Today has no match!";
 				mTvTimeDaysHours.setText(abc);
 			}

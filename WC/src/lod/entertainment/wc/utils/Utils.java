@@ -345,12 +345,10 @@ public class Utils {
 			for (int i = 0; i < allMatches.size(); i++) {
 				GameInfo temp = allMatches.get(i);
 				String date = getDateAsTimeZone(temp.getDate(),temp.getTime());
-				date = date.substring(0, 9);
-
+				date = date.substring(0, 10);
 				Calendar c = Calendar.getInstance();
 				SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 				String formattedDate = df.format(c.getTime());
-
 				if (date.equals(formattedDate)) {
 					tempMatches.add(allMatches.get(i));
 				}
