@@ -10,7 +10,28 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <permission
+        android:name="lod.entertainment.wc.gcm.C2D_MESSAGE"
+        android:protectionLevel="signature" >
+    </permission>
+
+    <uses-permission android:name="lod.entertainment.wc.gcm.C2D_MESSAGE" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- Network State Permissions to detect Internet status -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Permission to vibrate -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="WCApplication"
@@ -21,8 +42,8 @@
         <activity
             android:name="lod.entertainment.wc.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,24 +58,43 @@
             android:name="lod.entertainment.wc.GroupActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity 
+        <activity
             android:name="lod.entertainment.wc.ScheduleActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
-        <activity 
+        <activity
             android:name="lod.entertainment.wc.TeamDetailActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <service android:name=".data.UpdateDataService"></service>
-        <receiver android:name=".receiver.MatchdayNotificationReceiver">
-            <intent-filter >
-                <action android:name="android.intent.action.DATE_CHANGED"/>
-                <action android:name="lod.entertainment.wc.TEST_ACTION"/>
+
+        <service android:name=".data.UpdateDataService" >
+        </service>
+
+        <receiver android:name=".receiver.MatchdayNotificationReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="lod.entertainment.wc.TEST_ACTION" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".gcm.MyGCMReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="lod.entertainment.wc" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".gcm.GCMIntentService" />
+        <service android:name=".gcm.RegisterGCMService"></service>
     </application>
 
 </manifest>

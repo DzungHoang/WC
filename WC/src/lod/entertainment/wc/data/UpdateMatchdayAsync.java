@@ -26,7 +26,7 @@ public class UpdateMatchdayAsync extends AsyncTask<Integer, Void, String>{
 		if ((round_number > 0) && (round_number < 21)){
 			HTTPHandler handler = new HTTPHandler();
 			ret = handler.makeHTTPRequest(url + round_number, HTTPHandler.GET);
-//			Utils.overwriteFileInSD(mContext, ret, "games_round_"+round_number+".json");
+			Utils.overwriteFileInSD(mContext, ret, "games_round_"+round_number+".json");
 		}
 		return ret;
 	}

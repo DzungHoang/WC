@@ -19,12 +19,12 @@ public class UpdateDataService extends Service{
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		String action = intent.getAction();
 		Log.d("DungHV","onStartCommand: " + action);
-		if (action.equals(CMD_UPDATE_MATCHDAY)){
+		if (action != null && action.equals(CMD_UPDATE_MATCHDAY)){
 			
 			UpdateMatchdayAsync updateMatchday = new UpdateMatchdayAsync(getApplicationContext());
 			updateMatchday.execute(calculateMatchDay());
 		}
-		return START_REDELIVER_INTENT;
+		return START_STICKY;
 	}
 	
 	/**

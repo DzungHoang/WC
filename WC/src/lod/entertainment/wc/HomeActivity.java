@@ -32,9 +32,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
+//
+//import com.facebook.UiLifecycleHelper;
+//import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
@@ -234,11 +234,11 @@ public class HomeActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.btn_home_facebook:
-			Toast.makeText(mContext, "dace", Toast.LENGTH_SHORT).show();
-			UiLifecycleHelper ui = new UiLifecycleHelper(this, null);
-			ShareDialogBuilder builder = new ShareDialogBuilder(this);
-			builder.setLink("https://play.google.com/store/apps/details?id=lod.game.goldmine");
-			ui.trackPendingDialogCall(builder.build().present());
+//			Toast.makeText(mContext, "dace", Toast.LENGTH_SHORT).show();
+//			UiLifecycleHelper ui = new UiLifecycleHelper(this, null);
+//			ShareDialogBuilder builder = new ShareDialogBuilder(this);
+//			builder.setLink("https://play.google.com/store/apps/details?id=lod.game.goldmine");
+//			ui.trackPendingDialogCall(builder.build().present());
 			break;
 		case R.id.btn_home_setting:
 			// TODO:

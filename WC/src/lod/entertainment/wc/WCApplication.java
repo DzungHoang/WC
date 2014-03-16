@@ -6,6 +6,7 @@ import java.util.List;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
+import lod.entertainment.wc.gcm.RegisterGCMService;
 import lod.entertainment.wc.utils.PreferenceUtils;
 import lod.entertainment.wc.utils.Utils;
 import android.app.Application;
@@ -23,7 +24,9 @@ public class WCApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
+		Intent intent = new Intent();
+		intent.setClass(this, RegisterGCMService.class);
+		startService(intent);
 		// Read match schedule list
 		long times = System.currentTimeMillis();
 		Log.d("DungHV", "start ");
