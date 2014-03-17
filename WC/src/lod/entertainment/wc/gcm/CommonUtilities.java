@@ -6,7 +6,7 @@ import android.content.Intent;
 public final class CommonUtilities {
      
 	//TODO
-    static final String SERVER_URL = "http://192.168.0.105/gcm_server_php/register.php"; 
+    static final String SERVER_URL = "http://symobile.vn/gcm/register.php"; 
  
     // Google project id
     static final String SENDER_ID = "853283542700"; 
