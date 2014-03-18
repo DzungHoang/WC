@@ -30,6 +30,7 @@ public class TeamFavoriteSelectActivity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_favorite_selection);
+		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
 		setTitle(R.string.title_team_selection);
 		mApplication = (WCApplication) getApplication();
 		// Initiate list team

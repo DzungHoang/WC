@@ -236,7 +236,6 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			}else{
 				mLvNextMatch.setVisibility(View.GONE);
 				String abc = "Today has no match!";
-				mTvTimeDaysHours.setText(abc);
 			}
 		}
 	}
