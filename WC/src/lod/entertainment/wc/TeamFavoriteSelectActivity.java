@@ -5,15 +5,15 @@ import java.util.List;
 
 import lod.entertainment.wc.adapter.AdapterListTeamFavoriteSelection;
 import lod.entertainment.wc.entity.TeamInfo;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class TeamFavoriteSelectActivity extends Activity implements
+public class TeamFavoriteSelectActivity extends ActionBarActivity implements
 		OnClickListener {
 
 	private WCApplication mApplication;

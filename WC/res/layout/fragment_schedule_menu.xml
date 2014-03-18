@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#7aac1a" >
 
     <com.google.ads.AdView
         android:id="@+id/adViewScheduleMenu"
@@ -32,7 +33,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_green"
                 android:gravity="center"
                 android:text="@string/btn_match_team"
                 android:textColor="@color/white" />
@@ -45,7 +46,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_group"
                 android:textColor="@color/white" />
@@ -58,7 +59,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_round_16"
                 android:textColor="@color/white" />
@@ -71,7 +72,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_quarter_final"
                 android:textColor="@color/white" />
@@ -84,7 +85,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_semi_final"
                 android:textColor="@color/white" />
@@ -97,7 +98,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_third"
                 android:textColor="@color/white" />
@@ -110,7 +111,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_menu"
+                android:background="@drawable/btn_menu_red"
                 android:gravity="center"
                 android:text="@string/btn_match_final"
                 android:textColor="@color/white" />

@@ -14,10 +14,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TeamDetailActivity extends FragmentActivity {
+public class TeamDetailActivity extends ActionBarActivity {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -56,6 +57,7 @@ public class TeamDetailActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_details);
+		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
 		mApplication = (WCApplication) getApplication();
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.

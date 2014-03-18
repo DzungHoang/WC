@@ -24,10 +24,23 @@
     
     <!-- BUTTOM TITLE -->
     <string name="btn_select_team_favorite">Select your team</string>
-    <string name="btn_group">Group</string>
-    <string name="btn_schedule">Schedule</string>
+    <string name="btn_group">GROUP</string>
+    <string name="btn_schedule">FIXTURES</string>
     <string name="btn_done">Done</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="share">Share</string>
+    <string name="setting">Setting</string>
+    <string name="info">Info</string>
+    
+    <!-- Countdown table -->
+    <string name="count_down_days">DAYS</string>
+    <string name="count_down_day">DAY</string>
+    <string name="count_down_hours">HOURS</string>
+    <string name="count_down_hour">HOUR</string>
+    <string name="count_down_minutes">MINUTES</string>
+    <string name="count_down_minute">MINUTE</string>
+    <string name="count_down_seconds">SECONDS</string>
+    <string name="count_down_second">SECOND</string>
     
     <!-- MATCH TITLE -->
     <string name="btn_match_team">MATCH</string>

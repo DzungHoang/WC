@@ -356,4 +356,12 @@ public class Utils {
 		}
 		return tempMatches;
 	}
+	
+	public static String standardNumber(long number) {
+		if (number < 10) {
+			return "0" + number;
+		} else {
+			return String.valueOf(number);
+		}
+	}
 }
