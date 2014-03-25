@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class UpdateMatchdayAsync extends AsyncTask<Integer, Void, String>{
+public class UpdateMatchdayAsync extends AsyncTask<String, Void, String>{
 	
 	private final String url = "http://footballdb.herokuapp.com/api/v1/event/world.2014/round/";
 	
@@ -19,14 +19,22 @@ public class UpdateMatchdayAsync extends AsyncTask<Integer, Void, String>{
 	}
 	
 	@Override
-	protected String doInBackground(Integer... params) {
+	protected String doInBackground(String... params) {
 		String ret = "";
-		int round_number = params[0].intValue();
-		Log.d("DungHV","doInBackground: " + round_number);
-		if ((round_number > 0) && (round_number < 21)){
-			HTTPHandler handler = new HTTPHandler();
-			ret = handler.makeHTTPRequest(url + round_number, HTTPHandler.GET);
-			Utils.overwriteFileInSD(mContext, ret, "games_round_"+round_number+".json");
+		int round_number = Integer.parseInt(params[0]);
+		String json = params[1];
+		Log.d("DungHV","doInBackground: round_number = " + round_number);
+		Log.d("DungHV","doInBackground: json = " + json);
+		if(json != null && json.length() > 0){
+			ret = json;
+		}else{
+			if ((round_number > 0) && (round_number < 21)){
+				HTTPHandler handler = new HTTPHandler();
+				ret = handler.makeHTTPRequest(url + round_number, HTTPHandler.GET);
+			}
+		}
+		if(ret.length() > 0){
+			Utils.overwriteFileInSD(mContext, ret, "games_index_"+round_number+".json");
 		}
 		return ret;
 	}

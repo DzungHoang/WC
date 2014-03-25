@@ -22,7 +22,7 @@ public class UpdateDataService extends Service{
 		if (action != null && action.equals(CMD_UPDATE_MATCHDAY)){
 			
 			UpdateMatchdayAsync updateMatchday = new UpdateMatchdayAsync(getApplicationContext());
-			updateMatchday.execute(calculateMatchDay());
+			updateMatchday.execute(""+calculateMatchDay());
 		}
 		return START_STICKY;
 	}

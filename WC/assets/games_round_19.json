@@ -1,1 +1,2 @@
-{"event":{"key":"world.2014","title":"World Cup 2014"},"round":{"pos":19,"title":"Round 19  -  Match for third place","start_at":"1912/01/01","end_at":"1912/01/01"},"games":[]}
+{"event":{"key":"world.2014","title":"World Cup 2014"},"round":{"pos":19,"title":"Round 19  -  Match for third place","start_at":"1912/01/01","end_at":"1912/01/01"},"games":[
+{"team1_key":"mex","team1_title":"Mexico","team1_code":"MEX","team2_key":"cmr","team2_title":"Cameroon","team2_code":"CMR","play_at":"2014/06/13","score1":3,"score2":2,"score1ot":1,"score2ot":1,"score1p":2,"score2p":1}]}

@@ -15,24 +15,19 @@ import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.utils.Utils;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.view.MenuCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -72,6 +67,9 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 
 	private static final int CODE_SELECT_TEAM = 1;
 
+	private boolean needUpdate = true;
+	CountDownTimer timer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,8 +88,26 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		initCountDownTime();
 		// Initiate data on screen
 		initData();
-		
+
 		mDatabase = new DatabaseWC(mContext);
+
+		if (getIntent() != null) {
+			needUpdate = getIntent().getBooleanExtra("need_update", true);
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (needUpdate) {
+			mApplication.updateGameResult();
+			// update db team standing
+
+			needUpdate = false;
+			Toast.makeText(mContext, getString(R.string.progress_dialog_title),
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	/**
@@ -123,8 +139,12 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 
 		TeamInfo teamFavorite = mApplication.getTeamFavorite();
 		if (teamFavorite == null) {
-			mTvTeamFavorite.setText(R.string.btn_select_team_favorite); // Not have favorite team
-			mTvTeamFavorite.setTextColor(Color.WHITE); // Default color is red (define in xml)
+			mTvTeamFavorite.setText(R.string.btn_select_team_favorite); // Not
+																		// have
+																		// favorite
+																		// team
+			mTvTeamFavorite.setTextColor(Color.WHITE); // Default color is red
+														// (define in xml)
 		} else {
 			// Have favorite team
 			mTvTeamFavorite.setText(teamFavorite.getName().toUpperCase());
@@ -148,10 +168,11 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		Date dateDestination = c.getTime(); // Time to start WC (in brazil)
 		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss z");
 		formatter.setTimeZone(TimeZone.getDefault()); // Time zone of user
-		
+
 		Calendar destination = Calendar.getInstance();
 		try {
-			destination.setTime(formatter.parse(formatter.format(dateDestination)));
+			destination.setTime(formatter.parse(formatter
+					.format(dateDestination)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -163,12 +184,12 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		long timeEnd = destination.getTimeInMillis();
 		if (timeEnd > timeCurrent) {
 			mFrmNextMatch.setVisibility(View.GONE);
-			CountDownTimer timer = new CountDownTimer(timeEnd - timeCurrent,
-					1000) {
+			timer = new CountDownTimer(timeEnd - timeCurrent, 1000) {
 
 				@Override
 				public void onTick(long millisUntilFinished) {
-					long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+					long seconds = TimeUnit.MILLISECONDS
+							.toSeconds(millisUntilFinished);
 					long minutes = seconds / 60;
 					seconds = seconds % 60;
 					long hours = minutes / 60;
@@ -233,7 +254,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 				mAdapterNextMatch = new AdapterListScheduleLite(this,
 						todayMatches);
 				mLvNextMatch.setAdapter(mAdapterNextMatch);
-			}else{
+			} else {
 				mLvNextMatch.setVisibility(View.GONE);
 				String abc = "Today has no match!";
 			}
@@ -247,7 +268,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		mContext = getApplicationContext();
 		mApplication = (WCApplication) getApplication();
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -261,11 +282,15 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			break;
 		case R.id.btn_home_team:
 			if (mApplication.getTeamFavorite() == null) {
-				Intent intentSelectFavoriteTeam = new Intent(mContext, TeamFavoriteSelectActivity.class);
-				startActivityForResult(intentSelectFavoriteTeam, CODE_SELECT_TEAM);
+				Intent intentSelectFavoriteTeam = new Intent(mContext,
+						TeamFavoriteSelectActivity.class);
+				startActivityForResult(intentSelectFavoriteTeam,
+						CODE_SELECT_TEAM);
 			} else {
-				Intent i = new Intent(getApplicationContext(), TeamDetailActivity.class);
-				i.putExtra(TeamDetailActivity.KEY_TEAM_CODE, mApplication.getTeamFavorite().getCode());
+				Intent i = new Intent(getApplicationContext(),
+						TeamDetailActivity.class);
+				i.putExtra(TeamDetailActivity.KEY_TEAM_CODE, mApplication
+						.getTeamFavorite().getCode());
 				startActivity(i);
 			}
 			break;
@@ -290,12 +315,13 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			break;
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
 			if (requestCode == CODE_SELECT_TEAM) {
-				String teamCode = data.getStringExtra(TeamFavoriteSelectActivity.KEY_TEAM_CODE);
+				String teamCode = data
+						.getStringExtra(TeamFavoriteSelectActivity.KEY_TEAM_CODE);
 				mApplication.setTeamFavorite(teamCode);
 				TeamInfo team = mApplication.getTeamByCode(teamCode);
 				mImgTeamLogo.setImageResource(team.getFlag());
@@ -309,6 +335,11 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 	protected void onDestroy() {
 		super.onDestroy();
 		mDatabase.close();
+		needUpdate = true;
+		if (timer != null) {
+			timer.cancel();
+			timer = null;
+		}
 		Log.d("TienVV", "destroy");
 	}
 
@@ -317,10 +348,12 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.main, menu);
 
 		MenuItem item = menu.findItem(R.id.action_share);
-		actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+		actionProvider = (ShareActionProvider) MenuItemCompat
+				.getActionProvider(item);
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=lod.game.goldmine");
+		intent.putExtra(Intent.EXTRA_TEXT,
+				"https://play.google.com/store/apps/details?id=lod.game.goldmine");
 		actionProvider.setShareIntent(intent);
 		return true;
 	}

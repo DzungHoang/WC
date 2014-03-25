@@ -318,4 +318,14 @@ public class TeamInfo {
 	public String getCode() {
 		return code;
 	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	public void setKey(String key){
+		this.key = key;
+	}
+	public void setCode(String code){
+		this.code = code;
+	}
 }

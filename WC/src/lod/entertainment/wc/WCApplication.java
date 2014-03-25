@@ -6,6 +6,7 @@ import java.util.List;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
+import lod.entertainment.wc.gcm.GCMIntentService;
 import lod.entertainment.wc.gcm.RegisterGCMService;
 import lod.entertainment.wc.utils.PreferenceUtils;
 import lod.entertainment.wc.utils.Utils;
@@ -53,16 +54,19 @@ public class WCApplication extends Application{
 		String keyTeam = mPrefUtils.getTeamFavorite();
 		mTeamFavorite = getTeamByCode(keyTeam);
 		
-		for(int i = 1; i<21; i++){
-			Utils.copyFromAssetToSD(this, "games_round_"+ i + ".json");
-		}
-				
+//		for(int i = 1; i<21; i++){
+//			Utils.copyFromAssetToSD(this, "games_round_"+ i + ".json");
+//		}
+//				
+//		updateGameResult();
 		long gap = System.currentTimeMillis() - time;
 		Log.d("DungHV","gap = " + gap);
 	}
 	
 	public void updateGameResult(){
-		Utils.updateGameResults(this, "games_round_2.json", mGameScheduleList);
+		for (int i = 1; i < 65; i++){
+			Utils.updateGameResults(this, "games_index_" + i + ".json", mGameScheduleList);
+		}
 	}
 	
 	public List<TeamInfo> getListTeam() {
