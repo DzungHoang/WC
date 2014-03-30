@@ -3,6 +3,7 @@ package lod.entertainment.wc;
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.gamexp.facebookutils.FacebookUtils;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
@@ -22,6 +23,8 @@ public class WCApplication extends Application{
 	private ArrayList<TeamInfo> mTeamList;
 	private ArrayList<MatchDayInfo> mMatchDayList;
 	private List<GameInfo> mGameScheduleList;
+	
+	private FacebookUtils mFacebookUtils;
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -207,5 +210,20 @@ public class WCApplication extends Application{
 			}
 		}
 		return listTeam;
+	}
+	
+	/**
+	 * Set facebook utils object
+	 * @param facebookUtils
+	 */
+	public void setFacebookUtil(FacebookUtils facebookUtils) {
+		mFacebookUtils = facebookUtils;
+	}
+	/**
+	 * Get facebook utils object
+	 * @return
+	 */
+	public FacebookUtils getFacebookUtils() {
+		return mFacebookUtils;
 	}
 }

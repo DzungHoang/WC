@@ -95,6 +95,14 @@
 
         <service android:name=".gcm.GCMIntentService" />
         <service android:name=".gcm.RegisterGCMService"></service>
+        
+        <!-- FACEBOOK -->
+        <activity android:name="com.facebook.LoginActivity" >
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
     </application>
 
 </manifest>

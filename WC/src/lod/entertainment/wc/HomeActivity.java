@@ -14,15 +14,14 @@ import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.utils.Utils;
+import vn.gamexp.facebookutils.FacebookUtils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +42,6 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 	private Context mContext;
 	private DatabaseWC mDatabase;
 	private WCApplication mApplication;
-	private ShareActionProvider actionProvider;
 
 	private RelativeLayout mFrmNextMatch;
 	private ListView mLvNextMatch;
@@ -68,8 +66,13 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 	private static final int CODE_SELECT_TEAM = 1;
 
 	private boolean needUpdate = true;
-	CountDownTimer timer;
-
+	private CountDownTimer timer;
+	// Facebook
+	private FacebookUtils mFacebookUtils;
+	private final String KEY_APP = "647991588588557"; // Application id get from Facebook dashboard
+	private final String KEY_HASH = "RFQGgfQmGVrLp9xlzqqutblwyXw="; // Key hash of each coder (get by code, not by cmd)
+	private final String LINK_SHARE_FACEBOOK = "https://play.google.com/store/apps/details?id=lod.game.goldmine";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,6 +97,9 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		if (getIntent() != null) {
 			needUpdate = getIntent().getBooleanExtra("need_update", true);
 		}
+		// Initiate facebook util
+		mFacebookUtils = new FacebookUtils(mContext, this, KEY_APP, KEY_HASH);
+		mApplication.setFacebookUtil(mFacebookUtils);
 	}
 
 	@Override
@@ -223,11 +229,6 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 								.setText(R.string.count_down_seconds);
 					}
 
-					Log.d("TienVV", "day: " + Utils.standardNumber(days));
-					Log.d("TienVV", "hour: " + Utils.standardNumber(hours));
-					Log.d("TienVV", "minute: " + Utils.standardNumber(minutes));
-					Log.d("TienVV", "second: " + Utils.standardNumber(seconds));
-
 					mTvCountdownDay.setText(Utils.standardNumber(days));
 					mTvCountdownHour.setText(Utils.standardNumber(hours));
 					mTvCountdownMinute.setText(Utils.standardNumber(minutes));
@@ -329,6 +330,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+		mFacebookUtils.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -346,15 +348,26 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_share:
+			mFacebookUtils.shareLink(LINK_SHARE_FACEBOOK);
+			break;
+			
+		case R.id.action_setting:
+			// TODO:
+			break;
+		case R.id.action_info:
+			// TODO:
+			break;
 
-		MenuItem item = menu.findItem(R.id.action_share);
-		actionProvider = (ShareActionProvider) MenuItemCompat
-				.getActionProvider(item);
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_TEXT,
-				"https://play.google.com/store/apps/details?id=lod.game.goldmine");
-		actionProvider.setShareIntent(intent);
+		default:
+			break;
+		}
 		return true;
 	}
 }

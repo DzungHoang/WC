@@ -2,6 +2,7 @@
 <resources>
 
     <string name="admob_id">a15325de6a90613</string>
+    <string name="app_id">647991588588557</string>
     
     <string name="app_name">WC</string>
     <string name="action_settings">Settings</string>
