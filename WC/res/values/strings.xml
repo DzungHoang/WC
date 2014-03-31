@@ -10,6 +10,17 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     
+    <string name="info_content">LOD Entertainment\n2014\n\nVersion 1.0</string>
+    
+    <!-- Button -->
+    <string name="btn_setting_cancel">Cancel</string>
+    <string name="btn_setting_save">Save</string>
+    <string name="btn_info_close">Close</string>
+    
+    <string name="tv_setting_team_favorite_title">Favorite team</string>
+    <string name="btn_setting_team_favorite_change">Change</string>
+    <string name="msg_favorite_team_change">You can change favorite team in Setting menu</string>
+    
     <!-- Thumb credit -->
     <string name="credit_afp">&#169;AFP</string>
     <string name="credit_getty_image">&#169;Getty Images</string>
@@ -22,6 +33,10 @@
     <!-- Title actionbar -->
     <string name="title_team_selection">Select favorite team</string>
     <string name="title_group">Group</string>
+    <string name="title_fixtures">Fixtures</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_team_detail">Team detail</string>
+    <string name="title_dialog_info">INFO</string>
     
     <!-- BUTTOM TITLE -->
     <string name="btn_select_team_favorite">Select your team</string>
@@ -44,13 +59,13 @@
     <string name="count_down_second">SECOND</string>
     
     <!-- MATCH TITLE -->
-    <string name="btn_match_team">MATCH</string>
-    <string name="btn_match_group">GROUP STAGE</string>
-    <string name="btn_match_round_16">ROUND OF 16</string>
-    <string name="btn_match_quarter_final">QUARTER-FINALS</string>
-    <string name="btn_match_semi_final">SEMI-FINALS</string>
-    <string name="btn_match_third">THIRD PLACE</string>
-    <string name="btn_match_final">FINAL</string>
+    <string name="btn_match_team">match</string>
+    <string name="btn_match_group">Group stage</string>
+    <string name="btn_match_round_16">Round of 16</string>
+    <string name="btn_match_quarter_final">Quarter-finals</string>
+    <string name="btn_match_semi_final">Semi-finals</string>
+    <string name="btn_match_third">Third place</string>
+    <string name="btn_match_final">Final</string>
     
     <!-- TABLE STANDING TITLE -->
     <string name="standing_team">Team</string>

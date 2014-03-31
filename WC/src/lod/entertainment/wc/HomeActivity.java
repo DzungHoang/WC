@@ -16,6 +16,7 @@ import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.utils.Utils;
 import vn.gamexp.facebookutils.FacebookUtils;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +24,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,8 +106,24 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
+		// Set team favorite
+		TeamInfo teamFavorite = mApplication.getTeamFavorite();
+		if (teamFavorite == null) {
+			mTvTeamFavorite.setText(R.string.btn_select_team_favorite); // Not
+																		// have
+																		// favorite
+																		// team
+			mTvTeamFavorite.setTextColor(Color.WHITE); // Default color is red
+														// (define in xml)
+		} else {
+			// Have favorite team
+			mTvTeamFavorite.setText(teamFavorite.getName().toUpperCase());
+			mTvTeamFavorite.setTextSize(20);
+			mTvTeamFavorite.setTextColor(Color.WHITE);
+			mImgTeamLogo.setImageResource(teamFavorite.getFlag());
+		}
+		// Update data
 		if (needUpdate) {
 			mApplication.updateGameResult();
 			// update db team standing
@@ -142,22 +160,6 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		mBtnTeam.setOnClickListener(this);
 		mImgTeamLogo = (ImageView) findViewById(R.id.img_home_team_favorite);
 		mTvTeamFavorite = (TextView) findViewById(R.id.tv_home_team_favorite);
-
-		TeamInfo teamFavorite = mApplication.getTeamFavorite();
-		if (teamFavorite == null) {
-			mTvTeamFavorite.setText(R.string.btn_select_team_favorite); // Not
-																		// have
-																		// favorite
-																		// team
-			mTvTeamFavorite.setTextColor(Color.WHITE); // Default color is red
-														// (define in xml)
-		} else {
-			// Have favorite team
-			mTvTeamFavorite.setText(teamFavorite.getName().toUpperCase());
-			mTvTeamFavorite.setTextSize(20);
-			mTvTeamFavorite.setTextColor(Color.WHITE);
-			mImgTeamLogo.setImageResource(teamFavorite.getFlag());
-		}
 	}
 
 	/**
@@ -359,10 +361,18 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			break;
 			
 		case R.id.action_setting:
-			// TODO:
+			Intent i = new Intent(mContext, SettingActivity.class);
+			startActivity(i);
 			break;
 		case R.id.action_info:
-			// TODO:
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.title_dialog_info);
+			TextView textView = new TextView(this);
+			textView.setText(R.string.info_content);
+			textView.setGravity(Gravity.CENTER);
+			builder.setView(textView);
+			builder.setNegativeButton(R.string.btn_info_close, null);
+			builder.create().show();
 			break;
 
 		default:

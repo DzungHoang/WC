@@ -10,13 +10,16 @@ import lod.entertainment.wc.fragment.FragmentScheduleMenu;
 import lod.entertainment.wc.fragment.FragmentScheduleMenu.OnMenuClickListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 public class ScheduleActivity extends ActionBarActivity implements
 		OnMenuClickListener {
 
 	private WCApplication mApplication;
+	private ActionBar mActionbar;
 	
 	private List<GameInfo> mListMatch;
 	private FrameLayout mFrmMain;
@@ -29,7 +32,11 @@ public class ScheduleActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule);
-		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
+		mActionbar = getSupportActionBar();
+		mActionbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
+		mActionbar.setHomeButtonEnabled(true);
+		mActionbar.setIcon(R.drawable.ic_action_back);
+		mActionbar.setTitle(R.string.title_fixtures);
 		// Initiate context
 		initContext();
 		// Initiate layout
@@ -56,6 +63,7 @@ public class ScheduleActivity extends ActionBarActivity implements
 			TeamInfo teamFavorite = mApplication.getTeamFavorite();
 			mListMatch = mApplication.getGameScheduleOfTeam(teamFavorite.getCode());
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch, false, true);
+			mFragmScheduleList.setTitle(mActionbar, teamFavorite.getName() + "'s " + getString(R.string.btn_match_team));
 			break;
 		case R.id.btn_schedule_match_group:
 			List<GameInfo> gameGroupA = mApplication.getGameScheduleOfGroup(TeamInfo.GROUP_A);
@@ -81,26 +89,32 @@ public class ScheduleActivity extends ActionBarActivity implements
 			mListMatch.addAll(gameGroupH);
 			
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch, true, false);
+			mFragmScheduleList.setTitle(mActionbar, getString(R.string.btn_match_group));
 			break;
 		case R.id.btn_schedule_match_round_16:
 			mListMatch = mApplication.getGameScheduleInRange(49, 56);
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch);
+			mFragmScheduleList.setTitle(mActionbar, getString(R.string.btn_match_round_16));
 			break;
 		case R.id.btn_schedule_match_quarter_final:
 			mListMatch = mApplication.getGameScheduleInRange(57, 60);
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch);
+			mFragmScheduleList.setTitle(mActionbar, getString(R.string.btn_match_quarter_final));
 			break;
 		case R.id.btn_schedule_match_semi_final:
 			mListMatch = mApplication.getGameScheduleInRange(61, 62);
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch);
+			mFragmScheduleList.setTitle(mActionbar, getString(R.string.btn_match_semi_final));
 			break;
 		case R.id.btn_schedule_match_third_place:
 			mListMatch = mApplication.getGameScheduleInRange(63, 63);
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch);
+			mFragmScheduleList.setTitle(mActionbar, getString(R.string.btn_match_third));
 			break;
 		case R.id.btn_schedule_match_final:
 			mListMatch = mApplication.getGameScheduleInRange(64, 64);
 			mFragmScheduleList = FragmentScheduleList.getInstance(mListMatch);
+			mFragmScheduleList.setTitle(mActionbar, getString(R.string.btn_match_final));
 			break;
 
 		default:
@@ -111,9 +125,28 @@ public class ScheduleActivity extends ActionBarActivity implements
 	}
 	
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			if (mFragmentManager.getBackStackEntryCount() > 0) {
+				mFragmentManager.popBackStack();
+				mActionbar.setTitle(R.string.title_fixtures);
+			} else {
+				finish();
+			}
+			break;
+
+		default:
+			break;
+		}
+		return true;
+	}
+	
+	@Override
 	public void onBackPressed() {
 		if (mFragmentManager.getBackStackEntryCount() > 0) {
 			mFragmentManager.popBackStack();
+			mActionbar.setTitle(R.string.title_fixtures);
 		} else {
 			finish();
 		}

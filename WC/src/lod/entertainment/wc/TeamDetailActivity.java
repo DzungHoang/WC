@@ -14,7 +14,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,7 @@ public class TeamDetailActivity extends ActionBarActivity {
 	
 	private WCApplication mApplication;
 	public static final String KEY_TEAM_CODE = "team_code";
+	private ActionBar mActionbar;
 
 	private ImageView mImgTeamLogo;
 	private TextView mTvTeamName;
@@ -57,7 +60,12 @@ public class TeamDetailActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_details);
-		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
+		mActionbar = getSupportActionBar();
+		mActionbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
+		mActionbar.setHomeButtonEnabled(true);
+		mActionbar.setIcon(R.drawable.ic_action_back);
+		mActionbar.setTitle(R.string.title_team_detail);
+		
 		mApplication = (WCApplication) getApplication();
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -152,6 +160,19 @@ public class TeamDetailActivity extends ActionBarActivity {
 			id = R.drawable.logo_usa;
 		}
 		return id;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			this.finish();
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import lod.entertainment.wc.adapter.AdapterListSchedule;
 import lod.entertainment.wc.entity.GameInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class FragmentScheduleList extends Fragment{
 	private static List<GameInfo> mListSchedule;
 	private static boolean isGrouped;
 	private static boolean isAteam;
+	private ActionBar mActionbar;
+	private String mTitle;
 	
 	public static FragmentScheduleList getInstance(List<GameInfo> listGame, boolean grouped, boolean ateam) {
 		INSTANCE = new FragmentScheduleList();
@@ -58,6 +61,7 @@ public class FragmentScheduleList extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		mView = inflater.inflate(R.layout.fragment_schedule_list, container, false);
+		mActionbar.setTitle(mTitle);
 		// Initiate layout
 		initLayout();
 		return mView;
@@ -71,5 +75,10 @@ public class FragmentScheduleList extends Fragment{
 		
 		mTvTimeZone = (TextView) mView.findViewById(R.id.tv_schedule_list_time_zone);
 		mTvTimeZone.setText(getString(R.string.note_time_zone_schedule).concat(" (").concat(TimeZone.getDefault().getID().concat(")")));
+	}
+	
+	public void setTitle(ActionBar actionbar, String title) {
+		mActionbar = actionbar;
+		mTitle = title;
 	}
 }

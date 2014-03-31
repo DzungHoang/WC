@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/lnr_setting_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_setting_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_menu_blue"
+            android:text="@string/btn_setting_save"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_setting_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_menu_blue"
+            android:text="@string/btn_setting_cancel"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_favorite_team_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#888888"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/tv_setting_team_favorite_title"
+        android:textColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_favorite_team_title"
+        android:background="#d7d7d7"
+        android:layout_marginTop="5dp" >
+
+        <ImageView
+            android:id="@+id/img_favorite_team"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart" />
+
+        <Button
+            android:id="@+id/btn_setting_favorite_team_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_menu_green"
+            android:text="@string/btn_setting_team_favorite_change"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_setting_favorite_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/btn_setting_favorite_team_change"
+            android:layout_toRightOf="@id/img_favorite_team"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
+</RelativeLayout>

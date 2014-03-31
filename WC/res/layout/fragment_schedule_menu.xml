@@ -36,6 +36,7 @@
                 android:background="@drawable/btn_menu_green"
                 android:gravity="center"
                 android:text="@string/btn_match_team"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
 
             <Button
@@ -49,6 +50,7 @@
                 android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_group"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
 
             <Button
@@ -62,6 +64,7 @@
                 android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_round_16"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
 
             <Button
@@ -75,6 +78,7 @@
                 android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_quarter_final"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
 
             <Button
@@ -88,6 +92,7 @@
                 android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_semi_final"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
 
             <Button
@@ -101,6 +106,7 @@
                 android:background="@drawable/btn_menu_blue"
                 android:gravity="center"
                 android:text="@string/btn_match_third"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
 
             <Button
@@ -114,6 +120,7 @@
                 android:background="@drawable/btn_menu_red"
                 android:gravity="center"
                 android:text="@string/btn_match_final"
+                android:textAllCaps="true"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </ScrollView>

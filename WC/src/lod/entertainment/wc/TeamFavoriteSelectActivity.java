@@ -7,7 +7,9 @@ import lod.entertainment.wc.adapter.AdapterListTeamFavoriteSelection;
 import lod.entertainment.wc.entity.TeamInfo;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,6 +19,7 @@ public class TeamFavoriteSelectActivity extends ActionBarActivity implements
 		OnClickListener {
 
 	private WCApplication mApplication;
+	private ActionBar mActionbar;
 	private ListView mLvListTeam;
 	private AdapterListTeamFavoriteSelection mAdapterListTeam;
 	private List<TeamInfo> mListTeamInfo;
@@ -30,8 +33,12 @@ public class TeamFavoriteSelectActivity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_favorite_selection);
-		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
-		setTitle(R.string.title_team_selection);
+		mActionbar = getSupportActionBar();
+		mActionbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
+		mActionbar.setHomeButtonEnabled(true);
+		mActionbar.setIcon(R.drawable.ic_action_back);
+		mActionbar.setTitle(R.string.title_team_selection);
+		
 		mApplication = (WCApplication) getApplication();
 		// Initiate list team
 		initListTeam();
@@ -110,5 +117,17 @@ public class TeamFavoriteSelectActivity extends ActionBarActivity implements
 			break;
 		}
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			this.finish();
+			break;
 
+		default:
+			break;
+		}
+		return true;
+	}
 }
