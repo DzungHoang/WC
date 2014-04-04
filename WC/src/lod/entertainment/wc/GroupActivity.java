@@ -15,28 +15,36 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class GroupActivity extends ActionBarActivity implements OnItemClickListener{
+public class GroupActivity extends ActionBarActivity implements
+		OnItemClickListener {
 
 	private ActionBar mActionbar;
 	private DatabaseWC mDatabase;
 	private ListView mLvListTeam;
 	private AdapterListTeamStanding mAdapterTeamStading;
 	private List<TeamStanding> mListTeam;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_group);
 		mActionbar = getSupportActionBar();
-		mActionbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_actionbar));
+		mActionbar.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.bg_actionbar));
 		mActionbar.setHomeButtonEnabled(true);
 		mActionbar.setIcon(R.drawable.ic_action_back);
 		mActionbar.setTitle(R.string.title_group);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		((WCApplication)getApplication()).updateGameResult();
 		mDatabase = new DatabaseWC(this);
 		// Initiate layout
 		initLayout();
 	}
-	
+
 	private void initLayout() {
 		mLvListTeam = (ListView) findViewById(R.id.lv_group_list_team);
 		mLvListTeam.setOnItemClickListener(this);
@@ -46,12 +54,14 @@ public class GroupActivity extends ActionBarActivity implements OnItemClickListe
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> adapter, View v, int position,
+			long id) {
 		Intent i = new Intent(getApplicationContext(), TeamDetailActivity.class);
-		i.putExtra(TeamDetailActivity.KEY_TEAM_CODE, mListTeam.get(position).getCode());
+		i.putExtra(TeamDetailActivity.KEY_TEAM_CODE, mListTeam.get(position)
+				.getCode());
 		startActivity(i);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

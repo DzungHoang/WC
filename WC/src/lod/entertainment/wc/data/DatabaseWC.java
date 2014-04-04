@@ -525,8 +525,9 @@ public class DatabaseWC extends SQLiteOpenHelper {
 	 *            Positive if increase, Negative if decrease, = 0 if no change
 	 *            this information
 	 */
-	public void updateTeamInfoStanding(String code, int mp, int win, int lose,
+	public void updateTeamInfoStanding(String code, int mp, int win, int draw, int lose,
 			int goalFor, int goalAgainst, int points) {
+		Log.d("DungHV", "updateTeamInfoStanding: code =  " + code + ", mp = " + mp + ", win = " + win + ", draw = " + draw + ", lose = " + lose + ", GF = " + goalFor + ", GA = " + goalAgainst + ", Point = " + points);
 		SQLiteDatabase db = getWritableDatabase();
 		Cursor c = null;
 		try {
@@ -535,6 +536,7 @@ public class DatabaseWC extends SQLiteOpenHelper {
 			if (c != null && c.moveToFirst()) {
 				int mpOld = c.getInt(c.getColumnIndex(COL_MP));
 				int winOld = c.getInt(c.getColumnIndex(COL_W));
+				int drawOld = c.getInt(c.getColumnIndex(COL_D));
 				int loseOld = c.getInt(c.getColumnIndex(COL_L));
 				int goalForOld = c.getInt(c.getColumnIndex(COL_GF));
 				int goalAgainstOld = c.getInt(c.getColumnIndex(COL_GA));
@@ -547,6 +549,9 @@ public class DatabaseWC extends SQLiteOpenHelper {
 				if (win != 0) {
 					values.put(COL_W, winOld + win);
 				}
+				if (win != 0) {
+					values.put(COL_D, drawOld + draw);
+				}
 				if (lose != 0) {
 					values.put(COL_L, loseOld + lose);
 				}
@@ -554,12 +559,12 @@ public class DatabaseWC extends SQLiteOpenHelper {
 					values.put(COL_GF, goalForOld + goalFor);
 				}
 				if (goalAgainst != 0) {
-					values.put(COL_GA, goalAgainstOld - goalAgainst);
+					values.put(COL_GA, goalAgainstOld + goalAgainst);
 				}
-				if (pointsOld != 0) {
-					values.put(COL_PTS, pointsOld - points);
+				if (points != 0) {
+					values.put(COL_PTS, pointsOld + points);
 				}
-				int count = db.update(CREATE_TABLE_STANDING, values, COL_CODE + "='" + code
+				int count = db.update(TABLE_STANDING, values, COL_CODE + "='" + code
 						+ "'", null);
 				if (count > 0) {
 					Log.i("TienVV", "updateTeamInfoStanding: update " + COL_CODE + " success");

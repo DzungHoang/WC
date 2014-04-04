@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import lod.entertainment.wc.HomeActivity;
+import lod.entertainment.wc.R;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
@@ -26,7 +28,11 @@ import org.json.JSONObject;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
@@ -223,7 +229,7 @@ public class Utils {
 				// }
 				// }
 			} catch (Exception e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 	}
@@ -477,24 +483,29 @@ public class Utils {
 	}
 
 	public static boolean checkAppRunning(Context context) {
-		//TODO
+		// TODO
 		boolean ret = false;
 		ActivityManager activityManager = (ActivityManager) context
 				.getSystemService(Context.ACTIVITY_SERVICE);
 		List<RunningAppProcessInfo> procInfos = activityManager
 				.getRunningAppProcesses();
 		for (int i = 0; i < procInfos.size(); i++) {
-			if (procInfos.get(i).processName.equals("lod.entertainment.wc")
-					) {
+			if (procInfos.get(i).processName.equals("lod.entertainment.wc")) {
 				// Toast.makeText(context, "Browser is running",
 				// Toast.LENGTH_LONG).show();
 				String[] pkgList = procInfos.get(i).pkgList;
-				if(pkgList != null){
-//					for (int j = 0; j< pkgList.length; j++){
-						Log.d("DungHV","importance = " + procInfos.get(i).importance);
-						Log.d("DungHV","importanceReasonCode = " + procInfos.get(i).importanceReasonCode);
-						Log.d("DungHV","importance = " + procInfos.get(i).importanceReasonComponent.toString());
-//					}
+				if (pkgList != null) {
+					// for (int j = 0; j< pkgList.length; j++){
+					Log.d("DungHV", "importance = "
+							+ procInfos.get(i).importance);
+					Log.d("DungHV",
+							"importanceReasonCode = "
+									+ procInfos.get(i).importanceReasonCode);
+					Log.d("DungHV",
+							"importance = "
+									+ procInfos.get(i).importanceReasonComponent
+											.toString());
+					// }
 				}
 				ret = true;
 
@@ -502,5 +513,98 @@ public class Utils {
 		}
 		Log.d("DungHV", "checkAppRunning: " + ret);
 		return ret;
+	}
+
+	public static GameInfo parseGameInfo(String jsonResult) {
+		if (jsonResult == null) {
+			return null;
+		}
+
+		GameInfo ret = null;
+		try {
+			JSONObject game = new JSONObject(jsonResult);
+			int index = Integer.parseInt(game.getString("game_index"));
+			String team1Key = game.getString("team1_key");
+			String team1Code = game.getString("team1_code");
+			String team1Title = game.getString("team1_title");
+			String team2Key = game.getString("team2_key");
+			String team2Code = game.getString("team2_code");
+			String team2Title = game.getString("team2_title");
+			String date = game.getString("play_at");
+			String time = game.getString("time");
+
+			TeamInfo team1 = new TeamInfo(team1Key, team1Title, team1Code);
+			TeamInfo team2 = new TeamInfo(team2Key, team2Title, team2Code);
+
+			ret = new GameInfo(index, team1, team2, date, time);
+			int score1 = 0;
+			int score2 = 0;
+			int score1ext = 0;
+			int score2ext = 0;
+			int score1p = -1;
+			int score2p = -1;
+			try {
+				score1 = game.getInt("score1");
+				score2 = game.getInt("score2");
+				score1ext = game.getInt("score1ot");
+				score2ext = game.getInt("score2ot");
+				score1p = game.getInt("score1p");
+				score2p = game.getInt("score2p");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				ret.setScore(score1, score2, score1ext, score2ext, score1p,
+						score2p);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ret;
+	}
+
+	
+	public static void generateNotification(Context context, String title, String msg, PendingIntent pendingIntent){
+		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		
+		Notification notification = new Notification.Builder(
+				context)
+				.setContentTitle(title)
+				.setContentText(msg)
+				.setContentIntent(pendingIntent)
+				.setAutoCancel(true)
+				.setSmallIcon(R.drawable.ic_launcher)
+				.getNotification();
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		manager.notify(0, notification);
+	}
+	/**
+	 * Issues a notification to inform the user that server has sent a message.
+	 */
+	public static void generateNotification(Context context, String message) {
+		int icon = R.drawable.ic_launcher;
+		long when = System.currentTimeMillis();
+		NotificationManager notificationManager = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification notification = new Notification(icon, message, when);
+
+		String title = context.getString(R.string.app_name);
+
+		Intent notificationIntent = new Intent(context, HomeActivity.class);
+		// set intent so it does not start a new activity
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		PendingIntent intent = PendingIntent.getActivity(context, 0,
+				notificationIntent, 0);
+		notification.setLatestEventInfo(context, title, message, intent);
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+		// Play default notification sound
+		notification.defaults |= Notification.DEFAULT_SOUND;
+
+		// Vibrate if vibrate is enabled
+		notification.defaults |= Notification.DEFAULT_VIBRATE;
+		notificationManager.notify(0, notification);
+
 	}
 }

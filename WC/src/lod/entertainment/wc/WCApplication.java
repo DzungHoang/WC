@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.gamexp.facebookutils.FacebookUtils;
+import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
@@ -12,6 +13,7 @@ import lod.entertainment.wc.gcm.RegisterGCMService;
 import lod.entertainment.wc.utils.PreferenceUtils;
 import lod.entertainment.wc.utils.Utils;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
 
@@ -69,6 +71,26 @@ public class WCApplication extends Application{
 	public void updateGameResult(){
 		for (int i = 1; i < 65; i++){
 			Utils.updateGameResults(this, "games_index_" + i + ".json", mGameScheduleList);
+		}
+		
+		for(int i = 0; i< mGameScheduleList.size(); i++){
+			GameInfo temp = mGameScheduleList.get(i);
+			if(temp != null){
+				int score1 = temp.getScore1() + temp.getScore1Ext();
+				int score2 = temp.getScore2() + temp.getScore2Ext();
+
+				if(temp.getIndex() < 49 && score1 >= 0 && score2 >=0 ){
+					//update database
+					DatabaseWC db = new DatabaseWC(this);
+					int team1win = score1 > score2 ? 1:0;
+					int team1draw = score1 == score2 ? 1:0;
+					int team1lose = 1 - team1win;
+					
+					db.updateTeamInfoStanding(temp.getTeam1().getCode(), 1, team1win, team1draw,  team1lose, score1, score2, team1win*3 + team1draw);
+					db.updateTeamInfoStanding(temp.getTeam2().getCode(), 1, team1lose, team1draw,  team1win, score2, score1, team1lose*3 + team1draw);
+				}
+				
+			}
 		}
 	}
 	

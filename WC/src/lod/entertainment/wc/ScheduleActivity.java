@@ -51,6 +51,13 @@ public class ScheduleActivity extends ActionBarActivity implements
 		
 		mFragmentManager.beginTransaction().replace(R.id.frm_schedule_main, mFragmScheduleMenu).commit();
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		mApplication.updateGameResult();
+	}
 
 	private void initLayout() {
 		mFrmMain = (FrameLayout) findViewById(R.id.frm_schedule_main);
