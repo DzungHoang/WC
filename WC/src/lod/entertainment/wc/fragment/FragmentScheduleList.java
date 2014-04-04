@@ -61,7 +61,9 @@ public class FragmentScheduleList extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		mView = inflater.inflate(R.layout.fragment_schedule_list, container, false);
-		mActionbar.setTitle(mTitle);
+		if (mActionbar != null) {
+			mActionbar.setTitle(mTitle);
+		}
 		// Initiate layout
 		initLayout();
 		return mView;
