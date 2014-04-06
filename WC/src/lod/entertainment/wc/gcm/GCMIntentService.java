@@ -6,6 +6,7 @@ import lod.entertainment.wc.HomeActivity;
 import lod.entertainment.wc.R;
 import lod.entertainment.wc.WCApplication;
 import lod.entertainment.wc.data.UpdateMatchdayAsync;
+import lod.entertainment.wc.utils.LogUtils;
 import lod.entertainment.wc.utils.Utils;
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -13,7 +14,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.util.Patterns;
 
 import com.google.android.gcm.GCMBaseIntentService;
@@ -26,7 +26,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	private static final String MESSAGE_UPDATE_RESULT = "UPDATE_RESULT";
 	private static final String MESSAGE_UPDATE_APP = "UPDATE_APP";
 
-	private WCApplication mApplication;
+//	private WCApplication mApplication;
 
 	public GCMIntentService() {
 		super(CommonUtilities.SENDER_ID);
@@ -34,7 +34,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	public GCMIntentService(WCApplication application) {
 		super(CommonUtilities.SENDER_ID);
-		mApplication = application;
+//		mApplication = application;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 **/
 	@Override
 	protected void onRegistered(Context context, String registrationId) {
-		Log.i(TAG, "Device registered: regId = " + registrationId);
+		LogUtils.i(TAG, "Device registered: regId = " + registrationId);
 		CommonUtilities.displayMessage(context,
 				"Your device registred with GCM");
 		ServerUtilities.register(context, "WC-2014", getEmail(context),
@@ -56,7 +56,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		for (Account account : accounts) {
 			if (emailPattern.matcher(account.name).matches()) {
 				email = account.name;
-				Log.d("DungHV", "account.name = " + account.name);
+				LogUtils.d("DungHV", "account.name = " + account.name);
 			}
 		}
 		return email;
@@ -67,7 +67,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 * */
 	@Override
 	protected void onUnregistered(Context context, String registrationId) {
-		Log.i(TAG, "Device unregistered");
+		LogUtils.i(TAG, "Device unregistered");
 		CommonUtilities.displayMessage(context,
 				getString(R.string.gcm_unregistered));
 		ServerUtilities.unregister(context, registrationId);
@@ -78,7 +78,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 * */
 	@Override
 	protected void onMessage(Context context, Intent intent) {
-		Log.i(TAG, "Received message");
+		LogUtils.i(TAG, "Received message");
 		String message = intent.getExtras().getString("message");
 		String param1 = intent.getExtras().getString("param1");
 		String param2 = intent.getExtras().getString("param2");
@@ -107,9 +107,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 			}
 		}else if (message.equals(MESSAGE_UPDATE_APP)){
 			Intent updateApp = new Intent(Intent.ACTION_VIEW);
-			updateApp.setData(Uri.parse("market://details?id=" + "lod.entertainment.wc"));
+			updateApp.setData(Uri.parse("market://details?id=" + param1));
 			PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, updateApp, 0);
-			Utils.generateNotification(getApplicationContext(), "Update latest version to get new features...", "", pending);
+			Utils.generateNotification(getApplicationContext(), param2, param3, pending);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 * */
 	@Override
 	protected void onDeletedMessages(Context context, int total) {
-		Log.i(TAG, "Received deleted messages notification");
+		LogUtils.i(TAG, "Received deleted messages notification");
 		String message = getString(R.string.gcm_deleted, total);
 		CommonUtilities.displayMessage(context, message);
 		// notifies user
@@ -130,15 +130,15 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 * */
 	@Override
 	public void onError(Context context, String errorId) {
-		Log.i(TAG, "Received error: " + errorId);
+		LogUtils.i(TAG, "Received error: " + errorId);
 		CommonUtilities.displayMessage(context,
 				getString(R.string.gcm_error, errorId));
 	}
 
 	@Override
 	protected boolean onRecoverableError(Context context, String errorId) {
-		// log message
-		Log.i(TAG, "Received recoverable error: " + errorId);
+		// LogUtils message
+		LogUtils.i(TAG, "Received recoverable error: " + errorId);
 		CommonUtilities.displayMessage(context,
 				getString(R.string.gcm_recoverable_error, errorId));
 		return super.onRecoverableError(context, errorId);

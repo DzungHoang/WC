@@ -1,9 +1,9 @@
 package lod.entertainment.wc.data;
 
+import lod.entertainment.wc.utils.LogUtils;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 public class UpdateDataService extends Service{
 
@@ -18,7 +18,7 @@ public class UpdateDataService extends Service{
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		String action = intent.getAction();
-		Log.d("DungHV","onStartCommand: " + action);
+		LogUtils.d("DungHV","onStartCommand: " + action);
 		if (action != null && action.equals(CMD_UPDATE_MATCHDAY)){
 			
 			UpdateMatchdayAsync updateMatchday = new UpdateMatchdayAsync(getApplicationContext());

@@ -1,12 +1,11 @@
 package lod.entertainment.wc.gcm;
 
+import lod.entertainment.wc.utils.LogUtils;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
 
@@ -15,14 +14,13 @@ public class RegisterGCMService extends Service{
 	// Asyntask
     AsyncTask<Void, Void, Void> mRegisterTask;
      
-    // Alert dialog manager
+    // Alert diaLogUtils manager
     AlertDialogManager alert = new AlertDialogManager();
      
     // Connection detector
     ConnectionDetector cd;
 	@Override
 	public IBinder onBind(Intent arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -41,12 +39,12 @@ public class RegisterGCMService extends Service{
         GCMRegistrar.checkDevice(this);
      // Get GCM registration id
         final String regId = GCMRegistrar.getRegistrationId(this);
-        Log.d("DungHV","regId = " + regId);
+        LogUtils.d("DungHV","regId = " + regId);
         // Check if regid already presents
         if (regId.equals("")) {
             // Registration is not present, register now with GCM           
         	GCMRegistrar.register(this, CommonUtilities.SENDER_ID);
-            Log.d("DungHV","regId = " + regId);
+            LogUtils.d("DungHV","regId = " + regId);
         } else {
             // Device is already registered on GCM
             if (GCMRegistrar.isRegisteredOnServer(this)) {

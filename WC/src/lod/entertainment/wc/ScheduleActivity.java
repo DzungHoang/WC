@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 public class ScheduleActivity extends ActionBarActivity implements
 		OnMenuClickListener {
@@ -22,7 +21,7 @@ public class ScheduleActivity extends ActionBarActivity implements
 	private ActionBar mActionbar;
 	
 	private List<GameInfo> mListMatch;
-	private FrameLayout mFrmMain;
+//	private FrameLayout mFrmMain;
 	private FragmentManager mFragmentManager;
 	// Fragments
 	private FragmentScheduleMenu mFragmScheduleMenu;
@@ -54,13 +53,12 @@ public class ScheduleActivity extends ActionBarActivity implements
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		mApplication.updateGameResult();
 	}
 
 	private void initLayout() {
-		mFrmMain = (FrameLayout) findViewById(R.id.frm_schedule_main);
+//		mFrmMain = (FrameLayout) findViewById(R.id.frm_schedule_main);
 	}
 
 	@Override

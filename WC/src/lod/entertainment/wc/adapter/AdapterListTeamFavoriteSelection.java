@@ -1,6 +1,5 @@
 package lod.entertainment.wc.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lod.entertainment.wc.R;
@@ -20,8 +19,8 @@ public class AdapterListTeamFavoriteSelection extends BaseAdapter implements
 
 	private Activity mActivity;
 	private List<TeamInfo> mListTeam;
-	private List<RadioButton> mListRadioButton;
-	private boolean userSelected = false;
+//	private List<RadioButton> mListRadioButton;
+//	private boolean userSelected = false;
 	private int mPosChecked;
 	private RadioButton mRbtnCurrent;
 
@@ -29,7 +28,7 @@ public class AdapterListTeamFavoriteSelection extends BaseAdapter implements
 			List<TeamInfo> listTeam) {
 		mActivity = activity;
 		mListTeam = listTeam;
-		mListRadioButton = new ArrayList<RadioButton>();
+//		mListRadioButton = new ArrayList<RadioButton>();
 	}
 
 	@Override
@@ -105,7 +104,7 @@ public class AdapterListTeamFavoriteSelection extends BaseAdapter implements
 
 	@Override
 	public void onClick(View v) {
-		userSelected = true;
+//		userSelected = true;
 		if (mRbtnCurrent == null) {
 			mRbtnCurrent = (RadioButton) v;
 			mRbtnCurrent.setChecked(true);

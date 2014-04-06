@@ -12,7 +12,7 @@ public final class CommonUtilities {
     static final String SENDER_ID = "853283542700"; 
  
     /**
-     * Tag used on log messages.
+     * Tag used on LogUtils messages.
      */
     static final String TAG = "WC";
  

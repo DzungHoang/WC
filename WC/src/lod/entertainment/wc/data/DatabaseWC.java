@@ -5,13 +5,13 @@ import java.util.List;
 
 import lod.entertainment.wc.entity.TeamInfo;
 import lod.entertainment.wc.entity.TeamStanding;
+import lod.entertainment.wc.utils.LogUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DatabaseWC extends SQLiteOpenHelper {
 
@@ -55,10 +55,10 @@ public class DatabaseWC extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.d("TienVV", "onCreate");
+		LogUtils.d("TienVV", "onCreate");
 		db.execSQL(CREATE_TABLE_STANDING);
 		initTable(db);
-		Log.d("TienVV", "init table");
+		LogUtils.d("TienVV", "init table");
 	}
 
 	/**
@@ -448,7 +448,7 @@ public class DatabaseWC extends SQLiteOpenHelper {
 				} while (c.moveToNext());
 			}
 		} catch (SQLiteException e) {
-			Log.e("TienVV", "getAllInfoTeamStanding ex=" + e.toString());
+			LogUtils.e("TienVV", "getAllInfoTeamStanding ex=" + e.toString());
 		} finally {
 			if (c != null && !c.isClosed()) {
 				c.close();
@@ -489,7 +489,7 @@ public class DatabaseWC extends SQLiteOpenHelper {
 				} while (c.moveToNext());
 			}
 		} catch (SQLiteException e) {
-			Log.e("TienVV", "getInfoStandingOfGroup ex=" + e.toString());
+			LogUtils.e("TienVV", "getInfoStandingOfGroup ex=" + e.toString());
 		} finally {
 			if (c != null && !c.isClosed()) {
 				c.close();
@@ -527,7 +527,7 @@ public class DatabaseWC extends SQLiteOpenHelper {
 	 */
 	public void updateTeamInfoStanding(String code, int mp, int win, int draw, int lose,
 			int goalFor, int goalAgainst, int points) {
-		Log.d("DungHV", "updateTeamInfoStanding: code =  " + code + ", mp = " + mp + ", win = " + win + ", draw = " + draw + ", lose = " + lose + ", GF = " + goalFor + ", GA = " + goalAgainst + ", Point = " + points);
+		LogUtils.d("DungHV", "updateTeamInfoStanding: code =  " + code + ", mp = " + mp + ", win = " + win + ", draw = " + draw + ", lose = " + lose + ", GF = " + goalFor + ", GA = " + goalAgainst + ", Point = " + points);
 		SQLiteDatabase db = getWritableDatabase();
 		Cursor c = null;
 		try {
@@ -567,13 +567,13 @@ public class DatabaseWC extends SQLiteOpenHelper {
 				int count = db.update(TABLE_STANDING, values, COL_CODE + "='" + code
 						+ "'", null);
 				if (count > 0) {
-					Log.i("TienVV", "updateTeamInfoStanding: update " + COL_CODE + " success");
+					LogUtils.i("TienVV", "updateTeamInfoStanding: update " + COL_CODE + " success");
 				} else {
-					Log.i("TienVV", "updateTeamInfoStanding: update " + COL_CODE + " failed");
+					LogUtils.i("TienVV", "updateTeamInfoStanding: update " + COL_CODE + " failed");
 				}
 			}
 		} catch (SQLiteException e) {
-			Log.e("TienVV", "updateTeamInfoStanding ex=" + e.toString());
+			LogUtils.e("TienVV", "updateTeamInfoStanding ex=" + e.toString());
 		} finally {
 			if (c != null && c.isClosed() == false) {
 				c.close();

@@ -13,6 +13,7 @@ import lod.entertainment.wc.adapter.AdapterListScheduleLite;
 import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.TeamInfo;
+import lod.entertainment.wc.utils.LogUtils;
 import lod.entertainment.wc.utils.Utils;
 import vn.gamexp.facebookutils.FacebookUtils;
 import android.annotation.SuppressLint;
@@ -23,7 +24,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 //
 //import com.facebook.UiLifecycleHelper;
-//import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
+//import com.facebook.widget.FacebookDiaLogUtils.ShareDiaLogUtilsBuilder;
 
 public class HomeActivity extends ActionBarActivity implements OnClickListener {
 
@@ -62,7 +62,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 	private Button mBtnGroup;
 	private Button mBtnSchedule;
 	private Button mBtnTeam;
-	private ImageView mImgTeamLogo;
+	private ImageView mImgTeamLogUtilso;
 	private TextView mTvTeamFavorite;
 
 	private static final int CODE_SELECT_TEAM = 1;
@@ -121,7 +121,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			mTvTeamFavorite.setText(teamFavorite.getName().toUpperCase());
 			mTvTeamFavorite.setTextSize(20);
 			mTvTeamFavorite.setTextColor(Color.WHITE);
-			mImgTeamLogo.setImageResource(teamFavorite.getFlag());
+			mImgTeamLogUtilso.setImageResource(teamFavorite.getFlag());
 		}
 		// Update data
 		if (needUpdate) {
@@ -158,7 +158,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 
 		mBtnTeam = (Button) findViewById(R.id.btn_home_team);
 		mBtnTeam.setOnClickListener(this);
-		mImgTeamLogo = (ImageView) findViewById(R.id.img_home_team_favorite);
+		mImgTeamLogUtilso = (ImageView) findViewById(R.id.img_home_team_favorite);
 		mTvTeamFavorite = (TextView) findViewById(R.id.tv_home_team_favorite);
 	}
 
@@ -182,7 +182,6 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			destination.setTime(formatter.parse(formatter
 					.format(dateDestination)));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -259,7 +258,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 				mLvNextMatch.setAdapter(mAdapterNextMatch);
 			} else {
 				mLvNextMatch.setVisibility(View.GONE);
-				String abc = "Today has no match!";
+//				String abc = "Today has no match!";
 			}
 		}
 	}
@@ -300,18 +299,16 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 		// case R.id.btn_home_facebook:
 		// Toast.makeText(mContext, "dace", Toast.LENGTH_SHORT).show();
 		// UiLifecycleHelper ui = new UiLifecycleHelper(this, null);
-		// ShareDialogBuilder builder = new ShareDialogBuilder(this);
+		// ShareDiaLogUtilsBuilder builder = new ShareDiaLogUtilsBuilder(this);
 		// builder.setLink("https://play.google.com/store/apps/details?id=lod.game.goldmine");
-		// ui.trackPendingDialogCall(builder.build().present());
+		// ui.trackPendingDiaLogUtilsCall(builder.build().present());
 		// break;
 		// case R.id.btn_home_setting:
-		// // TODO:
 		// Intent intent = new Intent("lod.entertainment.wc.TEST_ACTION");
-		// Log.d("DungHV","send broad cast");
+		// LogUtils.d("DungHV","send broad cast");
 		// sendBroadcast(intent);
 		// break;
 		// case R.id.btn_home_info:
-		// // TODO:
 		// break;
 
 		default:
@@ -327,7 +324,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 						.getStringExtra(TeamFavoriteSelectActivity.KEY_TEAM_CODE);
 				mApplication.setTeamFavorite(teamCode);
 				TeamInfo team = mApplication.getTeamByCode(teamCode);
-				mImgTeamLogo.setImageResource(team.getFlag());
+				mImgTeamLogUtilso.setImageResource(team.getFlag());
 				mTvTeamFavorite.setText(team.getName().toUpperCase());
 			}
 		}
@@ -344,7 +341,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 			timer.cancel();
 			timer = null;
 		}
-		Log.d("TienVV", "destroy");
+		LogUtils.d("TienVV", "destroy");
 	}
 
 	@Override

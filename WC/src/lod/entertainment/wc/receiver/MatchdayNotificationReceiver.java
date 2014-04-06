@@ -1,7 +1,5 @@
 package lod.entertainment.wc.receiver;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import lod.entertainment.wc.R;
@@ -20,7 +18,7 @@ public class MatchdayNotificationReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
-//		if (action.equals(Intent.ACTION_DATE_CHANGED)) {
+		if (action.equals(Intent.ACTION_DATE_CHANGED)) {
 			String gameString = Utils.loadJSONFromAsset(context,
 					"schedule.json");
 			List<GameInfo> gameScheduleList = Utils
@@ -55,6 +53,6 @@ public class MatchdayNotificationReceiver extends BroadcastReceiver {
 				}
 			}
 		}
-//	}
+	}
 
 }

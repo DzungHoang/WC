@@ -1,6 +1,5 @@
 package lod.entertainment.wc.entity;
 
-import lod.entertainment.wc.R;
 
 
 public class MatchDayInfo {
@@ -33,5 +32,11 @@ public class MatchDayInfo {
 	 * */
 	public String getStart(){
 		return this.start;
+	}
+	/**
+	 * @return Start time of match day
+	 * */
+	public String getEnd(){
+		return this.end;
 	}
 }

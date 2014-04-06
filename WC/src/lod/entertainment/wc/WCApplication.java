@@ -3,19 +3,16 @@ package lod.entertainment.wc;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.gamexp.facebookutils.FacebookUtils;
-import lod.entertainment.wc.data.DatabaseWC;
 import lod.entertainment.wc.entity.GameInfo;
 import lod.entertainment.wc.entity.MatchDayInfo;
 import lod.entertainment.wc.entity.TeamInfo;
-import lod.entertainment.wc.gcm.GCMIntentService;
 import lod.entertainment.wc.gcm.RegisterGCMService;
+import lod.entertainment.wc.utils.LogUtils;
 import lod.entertainment.wc.utils.PreferenceUtils;
 import lod.entertainment.wc.utils.Utils;
+import vn.gamexp.facebookutils.FacebookUtils;
 import android.app.Application;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.util.Log;
 
 public class WCApplication extends Application{
 
@@ -35,24 +32,24 @@ public class WCApplication extends Application{
 		startService(intent);
 		// Read match schedule list
 		long times = System.currentTimeMillis();
-		Log.d("DungHV", "start ");
+		LogUtils.d("DungHV", "start ");
 		String gameString = Utils.loadJSONFromAsset(this, "schedule.json");
-		Log.d("TienVV", "game string: " + gameString);
+		LogUtils.d("TienVV", "game string: " + gameString);
 		mGameScheduleList = Utils.parseGameSchedule(gameString);
-		Log.d("TienVV", "game size: " + mGameScheduleList.size());
+		LogUtils.d("TienVV", "game size: " + mGameScheduleList.size());
 		long timee = System.currentTimeMillis();
-		Log.d("TienVV", "range mili: " + (timee - times));
+		LogUtils.d("TienVV", "range mili: " + (timee - times));
 		
 		long time = System.currentTimeMillis();
 		String jsonString = Utils.loadJSONFromAsset(this, "team_list.json");
-		Log.d("DungHV","jsonString = " + jsonString);
+		LogUtils.d("DungHV","jsonString = " + jsonString);
 		mTeamList = Utils.parseTeamList(jsonString);
-		Log.d("DungHV","teamList.length() = " + mTeamList.size());
+		LogUtils.d("DungHV","teamList.length() = " + mTeamList.size());
 		
 		String matchString = Utils.loadJSONFromAsset(this, "match_day_list.json");
-		Log.d("DungHV","matchString = " + matchString);
+		LogUtils.d("DungHV","matchString = " + matchString);
 		mMatchDayList = Utils.parseMatchDayList(matchString);
-		Log.d("DungHV","matchList.length() = " + mMatchDayList.size());
+		LogUtils.d("DungHV","matchList.length() = " + mMatchDayList.size());
 		
 		// Read team favorite from preferences
 		mPrefUtils = new PreferenceUtils(getApplicationContext());
@@ -65,7 +62,7 @@ public class WCApplication extends Application{
 //				
 //		updateGameResult();
 		long gap = System.currentTimeMillis() - time;
-		Log.d("DungHV","gap = " + gap);
+		LogUtils.d("DungHV","gap = " + gap);
 	}
 	
 	public void updateGameResult(){
@@ -73,25 +70,25 @@ public class WCApplication extends Application{
 			Utils.updateGameResults(this, "games_index_" + i + ".json", mGameScheduleList);
 		}
 		
-		for(int i = 0; i< mGameScheduleList.size(); i++){
-			GameInfo temp = mGameScheduleList.get(i);
-			if(temp != null){
-				int score1 = temp.getScore1() + temp.getScore1Ext();
-				int score2 = temp.getScore2() + temp.getScore2Ext();
-
-				if(temp.getIndex() < 49 && score1 >= 0 && score2 >=0 ){
-					//update database
-					DatabaseWC db = new DatabaseWC(this);
-					int team1win = score1 > score2 ? 1:0;
-					int team1draw = score1 == score2 ? 1:0;
-					int team1lose = 1 - team1win;
-					
-					db.updateTeamInfoStanding(temp.getTeam1().getCode(), 1, team1win, team1draw,  team1lose, score1, score2, team1win*3 + team1draw);
-					db.updateTeamInfoStanding(temp.getTeam2().getCode(), 1, team1lose, team1draw,  team1win, score2, score1, team1lose*3 + team1draw);
-				}
-				
-			}
-		}
+//		for(int i = 0; i< mGameScheduleList.size(); i++){
+//			GameInfo temp = mGameScheduleList.get(i);
+//			if(temp != null){
+//				int score1 = temp.getScore1() + temp.getScore1Ext();
+//				int score2 = temp.getScore2() + temp.getScore2Ext();
+//
+//				if(temp.getIndex() < 49 && score1 >= 0 && score2 >=0 ){
+//					//update database
+//					DatabaseWC db = new DatabaseWC(this);
+//					int team1win = score1 > score2 ? 1:0;
+//					int team1draw = score1 == score2 ? 1:0;
+//					int team1lose = 1 - team1win;
+//					
+//					db.updateTeamInfoStanding(temp.getTeam1().getCode(), 1, team1win, team1draw,  team1lose, score1, score2, team1win*3 + team1draw);
+//					db.updateTeamInfoStanding(temp.getTeam2().getCode(), 1, team1lose, team1draw,  team1win, score2, score1, team1lose*3 + team1draw);
+//				}
+//				
+//			}
+//		}
 	}
 	
 	public List<TeamInfo> getListTeam() {

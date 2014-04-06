@@ -1,6 +1,7 @@
 package lod.entertainment.wc.entity;
 
 import lod.entertainment.wc.R;
+import lod.entertainment.wc.utils.LogUtils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,7 +11,6 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -299,7 +299,7 @@ public class AutofitTextView extends TextView {
             lineCount = layout.getLineCount();
         }
 
-        if (SPEW) Log.d(TAG, "low=" + low + " high=" + high + " mid=" + mid +
+        if (SPEW) LogUtils.d(TAG, "low=" + low + " high=" + high + " mid=" + mid +
                 " target=" + targetWidth + " maxLines=" + maxLines + " lineCount=" + lineCount);
 
         if (lineCount > maxLines) {

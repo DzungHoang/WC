@@ -10,6 +10,7 @@ public class PreferenceUtils {
 	private static final String KEY_PREF = "wc_preferences";
 	private static final String KEY_TEAM = "key_team";
 	private static final String KEY_LAST_UPDATED = "last_updated";
+	private static final String KEY_UPDATED_GAME = "updated_game";
 	private SharedPreferences mPref;
 	private Editor mEditor;
 	
@@ -56,5 +57,22 @@ public class PreferenceUtils {
 	 */
 	public String getLastUpdated() {
 		return mPref.getString(KEY_LAST_UPDATED, null);
+	}
+	/**
+	 * Set last updated time to preference
+	 * @param lastUpdated
+	 */
+	public void setLastUpdatedGame(int lastUpdated) {
+		mEditor = mPref.edit();
+		mEditor.putInt(KEY_UPDATED_GAME, lastUpdated);
+		mEditor.commit();
+	}
+	
+	/**
+	 * Get last updated time
+	 * @return Last updated
+	 */
+	public int getLastUpdatedGame() {
+		return mPref.getInt(KEY_UPDATED_GAME, 0);
 	}
 }

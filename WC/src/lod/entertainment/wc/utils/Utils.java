@@ -34,7 +34,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 
 public class Utils {
 	/**
@@ -173,7 +172,7 @@ public class Utils {
 			return;
 		String jsonString = loadJSONFromExternal(context, fileName);
 		if (jsonString != null) {
-			Log.d("DungHV", "updateGameResults: json = " + jsonString);
+			LogUtils.d("DungHV", "updateGameResults: json = " + jsonString);
 			try {
 				JSONObject game = new JSONObject(jsonString);
 				// if(jsonObject != null){
@@ -189,9 +188,9 @@ public class Utils {
 					// besides, the real score is really rare to be equal
 					// "13 - 0" =))))))
 					if (Integer.valueOf(score1).intValue() < 13) {
-						String team1_code = game.getString("team1_code");
-						String team2_code = game.getString("team2_code");
-						String play_at = game.getString("play_at");
+//						String team1_code = game.getString("team1_code");
+//						String team2_code = game.getString("team2_code");
+//						String play_at = game.getString("play_at");
 						String index = game.getString("game_index");
 						GameInfo temp = findGame(index, gameInfoList);
 						if (temp != null) {
@@ -239,21 +238,21 @@ public class Utils {
 	 * 
 	 * @return the equivalent GameInfo
 	 * */
-	private static GameInfo findGame(String team1_code, String team2_code,
-			String play_at, List<GameInfo> gameList) {
-		if (gameList == null)
-			return null;
-		GameInfo ret = null;
-		for (int i = 0; i < gameList.size(); i++) {
-			GameInfo temp = gameList.get(i);
-			if (team1_code.equals(temp.getTeam1().getCode())
-					&& team2_code.equals(temp.getTeam2().getCode())
-					&& play_at.equals(temp.getDate())) {
-				ret = temp;
-			}
-		}
-		return ret;
-	}
+//	private static GameInfo findGame(String team1_code, String team2_code,
+//			String play_at, List<GameInfo> gameList) {
+//		if (gameList == null)
+//			return null;
+//		GameInfo ret = null;
+//		for (int i = 0; i < gameList.size(); i++) {
+//			GameInfo temp = gameList.get(i);
+//			if (team1_code.equals(temp.getTeam1().getCode())
+//					&& team2_code.equals(temp.getTeam2().getCode())
+//					&& play_at.equals(temp.getDate())) {
+//				ret = temp;
+//			}
+//		}
+//		return ret;
+//	}
 
 	private static GameInfo findGame(String index, List<GameInfo> gameList) {
 		if (gameList == null)
@@ -431,7 +430,6 @@ public class Utils {
 			formatter.setTimeZone(TimeZone.getDefault());
 			result = formatter.format(d);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -496,12 +494,12 @@ public class Utils {
 				String[] pkgList = procInfos.get(i).pkgList;
 				if (pkgList != null) {
 					// for (int j = 0; j< pkgList.length; j++){
-					Log.d("DungHV", "importance = "
+					LogUtils.d("DungHV", "importance = "
 							+ procInfos.get(i).importance);
-					Log.d("DungHV",
+					LogUtils.d("DungHV",
 							"importanceReasonCode = "
 									+ procInfos.get(i).importanceReasonCode);
-					Log.d("DungHV",
+					LogUtils.d("DungHV",
 							"importance = "
 									+ procInfos.get(i).importanceReasonComponent
 											.toString());
@@ -511,7 +509,7 @@ public class Utils {
 
 			}
 		}
-		Log.d("DungHV", "checkAppRunning: " + ret);
+		LogUtils.d("DungHV", "checkAppRunning: " + ret);
 		return ret;
 	}
 

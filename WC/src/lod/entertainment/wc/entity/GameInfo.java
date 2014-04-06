@@ -1,8 +1,5 @@
 package lod.entertainment.wc.entity;
 
-import java.util.Date;
-
-import android.text.format.Time;
 
 public class GameInfo {
 	

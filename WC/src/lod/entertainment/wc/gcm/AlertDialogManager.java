@@ -1,19 +1,18 @@
 package lod.entertainment.wc.gcm;
 
 import lod.entertainment.wc.R;
-import lod.entertainment.wc.R.drawable;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
 public class AlertDialogManager {
 	/**
-	 * Function to display simple Alert Dialog
+	 * Function to display simple Alert DiaLog
 	 * 
 	 * @param context
 	 *            - application context
 	 * @param title
-	 *            - alert dialog title
+	 *            - alert diaLog title
 	 * @param message
 	 *            - alert message
 	 * @param status
@@ -24,14 +23,14 @@ public class AlertDialogManager {
 			Boolean status) {
 		AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
-		// Setting Dialog Title
+		// Setting DiaLog Title
 		alertDialog.setTitle(title);
 
-		// Setting Dialog Message
+		// Setting DiaLog Message
 		alertDialog.setMessage(message);
 
 		if (status != null)
-			// Setting alert dialog icon
+			// Setting alert diaLog icon
 			alertDialog
 					.setIcon((status) ? R.drawable.success : R.drawable.fail);
 

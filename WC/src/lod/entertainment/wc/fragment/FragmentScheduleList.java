@@ -2,7 +2,6 @@ package lod.entertainment.wc.fragment;
 
 import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import lod.entertainment.wc.R;
 import lod.entertainment.wc.adapter.AdapterListSchedule;
