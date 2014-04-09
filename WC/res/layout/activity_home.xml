@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res/lod.entertainment.wc"
+    xmlns:app="http://schemas.android.com/apk/res/lod.wc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7aac1a"
@@ -89,7 +89,7 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/countdown_red" />
 
-                <lod.entertainment.wc.entity.AutofitTextView
+                <lod.wc.entity.AutofitTextView
                     android:id="@+id/tv_countdown_day"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/countdown_blue" />
 
-                <lod.entertainment.wc.entity.AutofitTextView
+                <lod.wc.entity.AutofitTextView
                     android:id="@+id/tv_countdown_hour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/countdown_orange" />
 
-                <lod.entertainment.wc.entity.AutofitTextView
+                <lod.wc.entity.AutofitTextView
                     android:id="@+id/tv_countdown_minute"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/countdown_green" />
 
-                <lod.entertainment.wc.entity.AutofitTextView
+                <lod.wc.entity.AutofitTextView
                     android:id="@+id/tv_countdown_second"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
             android:scaleType="fitStart"
             android:src="@drawable/icon_flag_no" />
 
-        <lod.entertainment.wc.entity.AutofitTextView
+        <lod.wc.entity.AutofitTextView
             android:id="@+id/tv_home_team_favorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -276,7 +276,7 @@
             android:scaleType="fitStart"
             android:src="@drawable/img_btn_group" />
 
-        <lod.entertainment.wc.entity.AutofitTextView
+        <lod.wc.entity.AutofitTextView
             android:id="@+id/tv_home_team_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
             android:scaleType="fitStart"
             android:src="@drawable/img_btn_schedule" />
 
-        <lod.entertainment.wc.entity.AutofitTextView
+        <lod.wc.entity.AutofitTextView
             android:id="@+id/tv_home_team_fixture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

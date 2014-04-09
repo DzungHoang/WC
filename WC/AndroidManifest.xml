@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lod.entertainment.wc"
+    package="lod.wc"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,11 +15,11 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <permission
-        android:name="lod.entertainment.wc.gcm.C2D_MESSAGE"
+        android:name="lod.wc.gcm.C2D_MESSAGE"
         android:protectionLevel="signature" >
     </permission>
 
-    <uses-permission android:name="lod.entertainment.wc.gcm.C2D_MESSAGE" />
+    <uses-permission android:name="lod.wc.gcm.C2D_MESSAGE" />
 
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -40,7 +40,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         <activity
-            android:name="lod.entertainment.wc.HomeActivity"
+            android:name="lod.wc.HomeActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
@@ -51,23 +51,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="lod.entertainment.wc.TeamFavoriteSelectActivity"
+            android:name="lod.wc.TeamFavoriteSelectActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="lod.entertainment.wc.GroupActivity"
+            android:name="lod.wc.GroupActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="lod.entertainment.wc.ScheduleActivity"
+            android:name="lod.wc.ScheduleActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="lod.entertainment.wc.TeamDetailActivity"
+            android:name="lod.wc.TeamDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="lod.entertainment.wc.SettingActivity"
+            android:name="lod.wc.SettingActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -80,7 +80,7 @@
         <receiver android:name=".receiver.MatchdayNotificationReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="lod.entertainment.wc.TEST_ACTION" />
+                <action android:name="lod.wc.TEST_ACTION" />
             </intent-filter>
         </receiver>
         <receiver
@@ -93,7 +93,7 @@
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="lod.entertainment.wc" />
+                <category android:name="lod.wc" />
             </intent-filter>
         </receiver>
 
