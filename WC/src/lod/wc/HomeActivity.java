@@ -72,7 +72,7 @@ public class HomeActivity extends ActionBarActivity implements OnClickListener {
 	// Facebook
 	private FacebookUtils mFacebookUtils;
 	private final String KEY_APP = "647991588588557"; // Application id get from Facebook dashboard
-	private final String KEY_HASH = "RFQGgfQmGVrLp9xlzqqutblwyXw="; // Key hash of each coder (get by code, not by cmd)
+	private final String KEY_HASH = "3iZ/ueEB4y7D44ond204okr//14="; // Key hash of each coder (get by code, not by cmd)
 	private final String LINK_SHARE_FACEBOOK = "https://play.google.com/store/apps/details?id=lod.wc";
 	
 	@Override
